@@ -58,22 +58,40 @@ public class JmController {
 		user_table = js.login(user_id, user_pw);
 		System.out.println("JmController.login user_table--->" + user_table);
 
-		// 로그인 실패시
+		// 로그인 실패: 비밀번호가 틀리거나 사용자 정보가 없음
 		if (user_table == null) {
 			model.addAttribute("loginError", "비밀번호 또는 아이디가 틀렸습니다.");
 			model.addAttribute("user_id", user_id); // 입력한 아이디를 다시 전달
-			System.out.println("JmController.login user_table == null...");
 			return "view_jm/login"; // 로그인 페이지로 리다이렉트
 		}
-
+		
+		// 탈퇴한 사용자 체크
+		if (user_table.getDel_state() == 1) {
+			model.addAttribute("loginError", "탈퇴한 회원입니다.");
+			return "view_jm/login";
+		}
+	
+		// 승인 요청 중 체크
+		if (user_table.getApproval().equals("0")) { // 예시로 승인 요청 중 체크
+			model.addAttribute("loginError", "승인 요청 중입니다.");
+			return "view_jm/login";
+		}
+		 // 탈퇴 상태 확인
+		 System.out.println("탈퇴 상태: " + user_table.getDel_state());
 		String user_id1 = user_table.getUser_id();
 		// 로그인 성공시
 		System.out.println("JmController.login 성공!!!!!");
+
+		// 기존 세션을 무효화하고 새로운 세션 ID 발급
 		session.invalidate(); // 기존 세션을 무효화
+		//request.changeSessionId(); // 새로운 세션 ID 발급
 		session = request.getSession(true); // 새로운 세션 생성
+
+		// 사용자 정보를 세션에 저장
 		session.setAttribute("user", user_table); // 새로운 세션에 사용자 정보 저장
-		System.out.println("JmController.login() session >>>" + session.getAttribute("user"));
 		session.setMaxInactiveInterval(30 * 60); // 30분 동안 활동이 없으면 세션 만료 설정
+		System.out.println("JmController.login() session >>>" + session.getAttribute("user"));
+		// 사용자 ID저장
 		SessionUtils.addAttribute("user_id",  user_id1);
 		return "redirect:/";
 	}
@@ -123,7 +141,7 @@ public class JmController {
 		// 등급 저장
 		user.setUser_level("1");
 		// 탈퇴 여부 저장
-		user.setDel_state(1);
+		user.setDel_state(0);
 		// 승인 여부 저장
 		user.setApproval("1");
 
@@ -235,7 +253,7 @@ public class JmController {
 		// 등급 저장
 		user_table.setUser_level("1");
 		// 탈퇴 여부 저장
-		user_table.setDel_state(1);
+		user_table.setDel_state(0);
 		// 승인 여부 저장
 		user_table.setApproval("0");
 		// 계좌 정보 user_id 저장
@@ -371,7 +389,7 @@ public class JmController {
 		// 등급 저장
 		user_table.setUser_level("1");
 		// 탈퇴 여부 저장
-		user_table.setDel_state(1);
+		user_table.setDel_state(0);
 		// 승인 여부 저장
 		user_table.setApproval("0");
 		// 계좌 정보 user_id 저장
@@ -467,12 +485,18 @@ public class JmController {
 
 	// 아이디 찾기
 	@PostMapping(value = "/findId")
-	public String findId(@RequestParam("user_email") String user_email, Model model) {
+	public String findId(@RequestParam("user_email") String user_email,@RequestParam("user_name") String user_name, Model model) {
 		System.out.println("JmController.findId start....");
 
 		System.out.println("JmController.findId user_email >>>>" + user_email);
+		System.out.println("JmController.findId user_name >>>>" + user_name);
+		
+		User_Table user = new User_Table();
 
-		String user_id = js.findId(user_email);
+		user.setUser_email(user_email);
+		user.setUser_name(user_name);
+
+		String user_id = js.findId(user);
 
 		System.out.println("JmController.findId user_id >>> " + user_id);
 
@@ -499,11 +523,10 @@ public class JmController {
 		System.out.println("JmController.findPw user_id >>> " + user.getUser_id());
 		System.out.println("JmController.findPw user_email >>> " + user.getUser_email());
 
-		// 파라메터 값 객체 set
+		// 사용자 확인 
 		User_Table user_table = js.findPw(user);
 
 		if (user_table != null) {
-			
 			String user_id = user_table.getUser_id();
 			model.addAttribute("user_id", user_id);
 			model.addAttribute("userCheckMessage", "회원확인이 완료되셨습니다");

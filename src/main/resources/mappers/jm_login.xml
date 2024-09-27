@@ -5,9 +5,8 @@
  <mapper namespace="com.oracle.jmAuto.dto.Mapper.jm">
  	<select id="loginUser" resultType="User_Table" parameterType="User_Table">
 	select *
-	from user_table
-	where user_id= #{user_id}
-	and user_pw= #{user_pw}
+    from user_table
+    where user_id = #{user_id}
 	</select>
 	
 	<!-- <insert id="joinUser" parameterType="User_Table">
@@ -50,7 +49,7 @@
 	<select id="findId" parameterType="User_Table" resultType="String">
 	select user_id
 	from user_table
-	where user_email = #{user_email}
+	where user_email = #{user_email} and user_name = #{user_name}
 	</select>
 	
 	<select id="findPw" parameterType="User_Table" resultType="User_table">

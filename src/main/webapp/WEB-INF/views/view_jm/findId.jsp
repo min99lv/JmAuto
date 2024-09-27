@@ -266,21 +266,26 @@ $(document).ready(function () {
 			<div class="container">
 				<form method="post" name="frm" action="/view_jm/findId">
 					<div class="form-group">
-						<label for="user_email">이메일</label> <input type="text"
-							id="user_email" name="user_email" required="required">
-
+						<label for="user_name">이름</label> 
+						<input type="text" 	id="user_name" name="user_name" required="required">
+					</div>
+					<div class="form-group">
+						<label for="user_email">이메일</label> 
+						<input type="text" 	id="user_email" name="user_email" required="required">
 						<button type="button" onclick="emailCheck()">인증번호 전송</button>
 					</div>
 					<div class="form-group">
 						<label for="auth_code">인증번호</label> <input type="text"
-							id="auth_code" name="auth_code" required="required">
+						id="auth_code" name="auth_code" required="required">
 						<button type="button" id="verifyAuthCodeBtn">인증번호 확인</button>
 						<p id="verifyAuthCodeMessage"></p>
 					</div>
-					
 					<div class="submit_btn">
 						<button type="submit" id="submit">아이디 찾기</button>
 					</div>
+				</div>
+				</div>
+				</div>	
 				</form>
 			</div>
 		</div>

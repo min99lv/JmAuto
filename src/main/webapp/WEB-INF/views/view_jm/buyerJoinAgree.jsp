@@ -19,7 +19,7 @@ body {
 	align-items: center;
 	/* 수직 중앙 정렬 */
 	height: 100vh; /* 뷰포트 높이 100%로 설정 */
-	/* 뷰포트 높이 100%로 설정 */
+	padding-bottom: 500px;
 }
 
 .content {
@@ -84,13 +84,14 @@ h1 {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
-	gap: 40px; /* 박스들 사이의 간격 */
-	padding: 100px; /* 컨테이너 내부 여백 */
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 설정 */
-	background-color: #fdfdfd; /* 박스 배경색 */
 	top: 400px;
-	width: 600px;
+	gap: 40px; /* 박스들 사이의 간격 */
 	height: auto;
+	padding: 100px; /* 컨테이너 내부 여백 */
+	width: 600px;
+	background-color: #fdfdfd; /* 박스 배경색 */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 설정 */
+	margin-bottom: 100px;
 }
 
 /* 폼 그룹 스타일 */
@@ -381,6 +382,9 @@ button:disabled {
 				</div>
 			</div>
 		</div>
+		<footer>
+			<%@ include file="../footer.jsp"%> 
+		</footer>
 	</div>
 
 </body>

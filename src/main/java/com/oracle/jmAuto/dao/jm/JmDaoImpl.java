@@ -1,7 +1,5 @@
 package com.oracle.jmAuto.dao.jm;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -20,7 +18,7 @@ public class JmDaoImpl implements JmDao {
 
 	// 로그인
 	@Override
-	public User_Table login(String user_id, String user_pw) {
+	public User_Table login(String user_id) {
 		System.out.println("JmDaoImpl.login start...");
 		User_Table user_table = new User_Table();
 		//Map<String, Object> user_table = new HashMap<>();
@@ -28,7 +26,6 @@ public class JmDaoImpl implements JmDao {
 		try {
 			System.out.println("JmDaoImpl.login() user_id" +user_id );
 			user_table.setUser_id(user_id);
-			user_table.setUser_pw(user_pw);
 			//user_table.put("user_id", user_id);
 			//user_table.put("user_pw", user_pw);
 			
@@ -187,11 +184,11 @@ public class JmDaoImpl implements JmDao {
 
 	// 아이디 찾기
 	@Override
-	public String findId(String user_email) {
+	public String findId(User_Table user) {
 		System.out.println("JmDaoImpl.findId start...");
-		System.out.println("JmDaoImpl.findId user_email >>>" + user_email);
+		
 
-		String user_id = session.selectOne("com.oracle.jmAuto.dto.Mapper.jm.findId", user_email);
+		String user_id = session.selectOne("com.oracle.jmAuto.dto.Mapper.jm.findId", user);
 
 		System.out.println("JmDaoImpl.findId user_id >>>" + user_id);
 
@@ -209,13 +206,13 @@ public class JmDaoImpl implements JmDao {
 
 	// 임시 비밀번호 발급 
 	@Override
-	public void updateTempPw(String user_id, String tempPassword) {
+	public void updateTempPw(String user_id, String hashedTempPw) {
 		System.out.println("JmDaoImpl.updateTempPw start/////");
 
 			User_Table user = new User_Table();
 			
 			user.setUser_id(user_id);
-			user.setUser_pw(tempPassword);
+			user.setUser_pw(hashedTempPw);
 
 			int updateTempPw = session.update("com.oracle.jmAuto.dto.Mapper.jm.updateTempPw", user);		
 
@@ -229,11 +226,10 @@ public class JmDaoImpl implements JmDao {
 
 	@Override
 	public String getUserEmail(String user_id) {
-		System.out.println("JmDaoImpl.getUserEmail start///////");		
+		System.out.println("JmDaoImpl.getUserEmail start !!!!!!!");		
 
 		String user_email = session.selectOne("com.oracle.jmAuto.dto.Mapper.jm.getUserEmail" , user_id);
 		System.out.println("JmDaoImpl.getUserEmail [user_email] : " + user_email );
-
 		
 		return user_email;
 	}
