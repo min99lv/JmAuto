@@ -17,21 +17,11 @@ body {
 }
 /* 전체 페이지의 기본 배경색과 중앙 정렬을 설정 */
 .contents {
-	margin: 0; /* 기본 여백 제거 */
-	padding: 0;
-	background-color: #fafafa; /* 페이지 배경색 */
-	display: flex; /* Flexbox를 사용하여 중앙 정렬 */
-	justify-content: center; /* 수평 중앙 정렬 */
-	align-items: center; /* 수직 중앙 정렬 */
+	align-items: center;/* 수직 중앙 정렬 */
 	height: 100vh; /* 뷰포트 높이 100%로 설정 */
+	padding-bottom: 100px;
 }
 
-.contents {
-	align-items: center;
-	/* 수직 중앙 정렬 */
-	height: 100vh; /* 뷰포트 높이 100%로 설정 */
-	/* 뷰포트 높이 100%로 설정 */
-}
 
 .content {
 	display: flex;

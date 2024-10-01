@@ -2,6 +2,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
             <!DOCTYPE html>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.js"></script>
             <html>
             <head>
                 <meta charset="UTF-8">

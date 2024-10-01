@@ -7,13 +7,16 @@
 		<title>Insert title here</title>
 	</head>
 	<style>
-		body {
+		body,html {
 			margin: 0;
-			padding: 0;
-			background-color: #fafafa;
-			min-height: 100vh;
-			/* 화면 높이에 맞추어 최소 높이 설정 */
-			font-family: Pretendard;
+				/* 브라우저 기본 여백을 제거 */
+				padding: 0;
+				/* 브라우저 기본 패딩을 제거 */
+				height: 100%;
+				/* 화면 높이를 100%로 설정 */
+				background-color: #fafafa;
+				/* 페이지의 배경색을 연한 회색으로 설정합니다. */
+				font-family: Pretendard;
 		}
 
 		.contents {
@@ -21,17 +24,14 @@
 			/* 수직 중앙 정렬 */
 			height: 100vh;
 			/* 뷰포트 높이 100%로 설정 */
-			padding-bottom: 100px;
+			padding-bottom: 300px;
 		}
 
 		.content {
 			display: flex;
-			flex-direction: column;
-			/* 세로 방향으로 배치 */
-			align-items: center;
-			/* 수평 중앙 정렬 */
-			justify-content: center;
-			/* 수직 중앙 정렬 */
+			flex-direction: column; /* 세로 방향으로 배치 */
+			align-items: center; /* 수평 중앙 정렬 */
+			justify-content: center; /* 수직 중앙 정렬 */
 		}
 
 		/* 제목 스타일 */
@@ -103,14 +103,14 @@
 		}
 
 		.form-group {
-			margin-bottom: 30px;
 			/* 각 폼 그룹의 하단 마진을 설정합니다. */
-			display: flex;
+			margin-bottom: 30px;
 			/* 폼 그룹 내의 항목들을 플렉스 박스로 배치합니다. */
-			align-items: center;
+			display: flex;
 			/* 폼 그룹 내 항목들을 수직 중앙에 정렬합니다. */
-			flex-wrap: wrap;
+			align-items: center;
 			/* 줄바꿈을 허용 */
+			flex-wrap: wrap;
 		}
 
 		.check_font {
@@ -132,12 +132,12 @@
 		}
 
 		.form-group label {
-			width: 150px;
 			/* 라벨의 너비를 150px로 설정합니다. */
-			margin-right: 10px;
+			width: 150px;
 			/* 라벨과 입력 필드 사이의 여백을 설정합니다. */
-			font-weight: bold;
+			margin-right: 10px;
 			/* 라벨의 글씨를 두껍게 설정합니다. */
+			font-weight: bold;
 		}
 
 		.form-group input {
@@ -148,6 +148,11 @@
 			border: 1px solid #ccc;
 			/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
 		}
+
+		.form-group input:focus{
+				border-color: #ff4714;
+				outline: none;
+			}
 
 		.file-upload label {
 			display: inline-block;
@@ -244,16 +249,15 @@
 		}
 
 		.form-group label #fileUpload {
-			display: inline-block;
-			padding-top: 5px;
-			text-align: center;
-			color: #fff;
-			vertical-align: middle;
-			background-color: #FF4714;
-			cursor: pointer;
-			width: 150px;
-			height: 30px;
-			margin-left: 10px;
+			background-color: #ff4714;
+				/* 버튼의 배경색을 주황색으로 설정합니다. */
+				color: #fff;
+				/* 버튼의 글씨 색을 흰색으로 설정합니다. */
+				border: none;
+				/* 버튼의 기본 테두리를 제거합니다. */
+				padding: 8px;
+				/* 입력 필드의 내부 여백을 설정합니다. */
+				margin-left: 20px;
 		}
 
 		#fileUpload {
@@ -266,8 +270,9 @@
 		}
 
 		.form-group label[for="fileUpload"] {
-			margin-left: 50px;
+			margin-left: 20px;
 			background-color: #ff4714;
+			margin-right: 0;
 			/* 버튼의 배경색을 주황색으로 설정합니다. */
 			color: #fff;
 			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
@@ -275,6 +280,7 @@
 			/* 버튼의 기본 테두리를 제거합니다. */
 			padding: 8px;
 			/* 입력 필드의 내부 여백을 설정합니다. */
+			text-align: center;
 		}
 
 		button:disabled {
@@ -285,31 +291,83 @@
 
 	<script type="text/javascript" src="/js/jquery.js"></script>
 	<script>
+	$(document).ready(function () {
+    // 모든 인풋 필드에서 입력이 발생할 때마다 유효성 검사 수행
+    $("#cert_num, #cert_name, #cert_loc, #cert_date, #fileUpload").on("input change", function () {
+        validateForm();
+    });
 
-		//  이벤트 핸들러
-		$(document).ready(function () {
-			$("#cert_num").on("input", function () {
-				validateCertNum();
-			})
-		})
+    // 유효성 검사 함수
+    function validateForm() {
+        var certNum = $("#cert_num").val().trim();
+        var certName = $("#cert_name").val().trim();
+        var certLoc = $("#cert_loc").val().trim();
+        var certDate = $("#cert_date").val().trim();
+        var fileUpload = $("#fileUpload").val().trim();
 
-	// 전문가 번호 유효성 체크
-		function validateCertNum() {
-			var certNum = $("#cert_num").val().trim();
-			var cerNumRegex = /^\d{11}[A-Z]$/; // 11자리 숫자와 1자리 대문자
-			var certNumCheckMessage = $("#certNumCheckMessage");
+        var certNumCheckMessage = $("#certNumCheckMessage");
+        var certNameCheckMessage = $("#certNameCheckMessage");
+        var certLocCheckMessage = $("#certLocCheckMessage");
+        var certDateCheckMessage = $("#certDateCheckMessage");
+        var certFileCheckMessage = $("#certFileCheckMessage");
 
-			// 자격증 번호 검사
-			if (!cerNumRegex.test(certNum)) {
-				certNumCheckMessage.text("숫자 11자리와 대문자 1자리로 입력해주세요");
-				$("#submit").attr("disabled", true); // 유효성 검사 실패 시 submit 버튼 비활성화
-				return false;
-			} else {
-				certNumCheckMessage.text(""); // 메시지 초기화
-				$("#submit").attr("disabled", false); // 유효성 검사 통과 시 submit 버튼 활성화
-				return true; // 유효성 검사 통과
-			}
-		}
+        var isValid = true;
+
+        // 자격증 번호 유효성 검사
+        var certNumRegex = /^[0-9]{11}[A-Z]$/;
+        if (!certNumRegex.test(certNum)) {
+            certNumCheckMessage.text("숫자 11자리와 대문자 1자리로 입력해주세요").css("color", "red");
+            isValid = false;
+        } else {
+            certNumCheckMessage.text("");
+        }
+
+        // 자격증 이름 확인
+        if (certName === "") {
+            certNameCheckMessage.text("자격증 이름을 입력해주세요").css("color", "red");
+            isValid = false;
+        } else {
+            certNameCheckMessage.text("");
+        }
+
+        // 자격증 발행처 확인
+        if (certLoc === "") {
+            certLocCheckMessage.text("자격증 발행처를 입력해주세요").css("color", "red");
+            isValid = false;
+        } else {
+            certLocCheckMessage.text("");
+        }
+
+        // 자격증 발행일 확인
+        if (certDate === "") {
+            certDateCheckMessage.text("자격증 발행일을 선택해주세요").css("color", "red");
+            isValid = false;
+        } else {
+            certDateCheckMessage.text("");
+        }
+
+        // 파일 업로드 확인
+        if (fileUpload === "") {
+            certFileCheckMessage.text("자격증 파일을 업로드해주세요").css("color", "red");
+            isValid = false;
+        } else {
+            certFileCheckMessage.text("");
+        }
+
+        // 모든 입력 값이 유효하면 버튼 활성화, 아니면 비활성화
+        if (isValid) {
+            $("#submit").attr("disabled", false);
+        } else {
+            $("#submit").attr("disabled", true);
+        }
+
+        // 폼 제출 가능 여부 반환 (true이면 제출, false이면 제출 막음)
+        return isValid;
+    }
+
+    // 입력 필드에 maxlength 속성 추가
+    $("#cert_num").attr("maxlength", 12);
+});
 
 		// 입력 필드에 maxlength 속성 추가
 		$("#cert_num").attr("maxlength", 12); // 11자리 숫자 + 1자리 알파벳
@@ -356,40 +414,40 @@
 				<div class="container">
 
 <!-- form -->
-					<form method="post" name="frm" action="/view_jm/profJoinInfo_2" enctype="multipart/form-data">
+					<form method="post" name="frm" action="/view_jm/profJoinInfo_2" enctype="multipart/form-data" onsubmit="return validateForm()">
 
 						<!-- 자격증 번호 -->
 						<div class="form-group">
 							<label for="cert_num">자격증 번호</label>
-							<input type="text" id="cert_num" name="cert_num" required="required" maxlength="12">
+							<input type="text" id="cert_num" name="cert_num"  maxlength="12">
 							<p class="check_font" id="certNumCheckMessage"></p>
 						</div>
 
 						<!-- 자격증 이름 -->
 						<div class="form-group">
 							<label for="cert_name">자격증 이름</label>
-							<input type="text" id="cert_name" name="cert_name" required="required">
+							<input type="text" id="cert_name" name="cert_name" >
 							<p class="check_font" id="certNameCheckMessage"></p>
 						</div>
 
 						<!-- 자격증 발행처 -->
 						<div class="form-group">
 							<label for="cert_loc">자격증 발행처</label>
-							<input type="text" id="cert_loc" name="cert_loc" required="required">
+							<input type="text" id="cert_loc" name="cert_loc" >
 							<p class="check_font" id="certLocCheckMessage"></p>
 						</div>
 
 						<!-- 자격증 발행일 -->
 						<div class="form-group">
 							<label for="cert_date">자격증 발행일</label>
-							<input type="date" id="cert_date" name="cert_date" required="required">
+							<input type="date" id="cert_date" name="cert_date" >
 							<p class="check_font" id="certDateCheckMessage"></p>
 						</div>
 
 						<!-- 자격증 파일  -->
 						<div class="form-group">
 							<label for="file">자격증 파일</label>
-							<input placeholder="첨부파일" name="fileUploadName" id="fileUploadName">
+							<input  name="fileUploadName" id="fileUploadName">
 							<label for="fileUpload" style="font-weight: normal;">파일찾기</label>
 							<input type="file" id="fileUpload" name="fileUpload">
 							<p class="check_font" id="certFileCheckMessage"></p>
@@ -397,7 +455,7 @@
 
 						<!-- 제출 버튼 -->
 						<div class="submit_btn">
-							<button type="submit" id="submit">다음</button>
+							<button type="submit" id="submit" disabled>다음</button>
 						</div>
 					</form>
 <!-- /form-->

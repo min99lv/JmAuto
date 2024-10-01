@@ -86,8 +86,8 @@
 				transform: translate(-50%, 0);
 				/* 텍스트를 중앙 정렬 */
 			}
-
-			/* 로그인 폼을 감싸는 컨테이너 */
+			
+			/* 회원가입 폼을 감싸는 컨테이너 스타일 */
 			.container {
 				display: flex;
 				flex-direction: column;

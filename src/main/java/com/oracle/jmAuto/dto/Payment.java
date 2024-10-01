@@ -27,4 +27,8 @@ public class Payment {
 	private String	delivery_date;		/* 배송일자 */
 	private int		buy_type;			/* 결제구분 */	 
 	private int 	del_state;			/* 할부기간 */
+	
+	
+	private String 	model;				// 차량 모델
+	private String 	color;				// 차량 가격
 }
