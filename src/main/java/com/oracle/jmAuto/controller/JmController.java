@@ -499,7 +499,13 @@ public class JmController {
 
 		System.out.println("JmController.findId user_id >>> " + user_id);
 
-		model.addAttribute("user_id", user_id);
+		if(user_id != null){
+			model.addAttribute("user_id", user_id);
+			model.addAttribute("userCheckMessage", "회원님의 이메일로 가입된 아이디 입니다.");
+		}else{
+			model.addAttribute("userCheckMessage", "회원정보와 일치하는 아이디가 존재하지 않습니다.");
+		}
+
 
 		return "view_jm/findIdResult";
 	}
