@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -206,6 +207,8 @@ public class MsController {
 		}
 	}
 
+	private final BCryptPasswordEncoder passwordEncoder; 
+
 	// 마이페이지 2.-> 회원정보 수정시 두 비밀번호체크 로직 (ajax로 갔다가 돌아오는 거임)
 	@ResponseBody
 	@GetMapping(value = "/view_ms/pwChk")
@@ -223,12 +226,23 @@ public class MsController {
 		System.out.println("checkPassword user_table. getid->" + user_table.getUser_id());
 		System.out.println("checkPassword 옴 input_pw-> " + input_pw); // 내가 입력한 패스워드가 무엇인가
 		System.out.println("checkPassword 옴 dbUser_pw->" + dbUser_pw);// 실제 db 패스워드
+			
+		//입력한 비밀번호와 DB에 저장된 해시된 비밀번호를 비교
+		//boolean passwordMatch = passwordEncoder.matches(input_pw, user_table.getUser_pw());
+		boolean passwordMatch = passwordEncoder.matches(input_pw, dbUser_pw);
 
-		if (input_pw.equals(dbUser_pw)) {
+		if(passwordMatch){
 			result = 1;
-		} else {
-			result = 0;
+		} else{
+		  result =	0;
 		}
+
+
+		// if (input_pw.equals(dbUser_pw)) {
+		// 	result = 1;
+		// } else {
+		// 	result = 0;
+		// }
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+	<link href="../css/join.css" rel="stylesheet" type="text/css">
 	<!DOCTYPE html>
 	<html>
 
@@ -8,152 +8,10 @@
 		<title>Insert title here</title>
 	</head>
 	<style>
-		body,html {
-			margin: 0;
-				/* 브라우저 기본 여백을 제거 */
-				padding: 0;
-				/* 브라우저 기본 패딩을 제거 */
-				height: 100%;
-				/* 화면 높이를 100%로 설정 */
-				background-color: #fafafa;
-				/* 페이지의 배경색을 연한 회색으로 설정합니다. */
-				font-family: Pretendard;
+		.form-group input:focus {
+			border-color: #ff4714;
+			outline: none;
 		}
-
-		.contents {
-			align-items: center;
-			/* 수직 중앙 정렬 */
-			height: 100vh;
-			/* 뷰포트 높이 100%로 설정 */
-			padding-bottom: 300px;
-		}
-
-		.content {
-			display: flex;
-			flex-direction: column; /* 세로 방향으로 배치 */
-			align-items: center; /* 수평 중앙 정렬 */
-			justify-content: center; /* 수직 중앙 정렬 */
-		}
-
-		/* 제목 스타일 */
-		h1 {
-			position: absolute;
-			top: 150px;
-			text-align: center;
-			color: #313131;
-		}
-
-		.join_step {
-			display: flex;
-			position: absolute;
-			/* 플렉스 박스 레이아웃 사용 */
-			top: 200px;
-			justify-content: center;
-			/* 가로 가운데 정렬 */
-			list-style: none;
-			/* 리스트 스타일 제거 */
-			padding: 0;
-			/* 기본 패딩 제거 */
-			margin-bottom: 30px;
-		}
-
-		.join_step li {
-			margin: 0 10px;
-			/* 항목 간의 간격 설정 */
-			position: relative;
-			/* 텍스트 위치를 조정하기 위해 relative 유지 */
-		}
-
-		.join_step li img {
-			width: 150px;
-			/* 리스트 항목 내 이미지의 크기를 설정 */
-		}
-
-		.join_step li span {
-			position: absolute;
-			/* 텍스트를 절대 위치로 설정 */
-			bottom: 0;
-			left: 50%;
-			/* 텍스트를 중앙 하단에 위치 */
-			color: #666;
-			/* 텍스트 색상 설정 */
-			line-height: 1.462em;
-			/* 텍스트 줄 간격 설정 */
-			white-space: nowrap;
-			/* 텍스트가 줄바꿈되지 않도록 설정 */
-			transform: translate(-50%, 0);
-			/* 텍스트를 중앙 정렬 */
-		}
-
-		/* 회원가입 폼을 감싸는 컨테이너 스타일 */
-		.container {
-			display: flex;
-			flex-direction: column;
-			position: absolute;
-			gap: 40px;
-			/* 박스들 사이의 간격 */
-			padding: 100px;
-			/* 컨테이너 내부 여백 */
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			/* 박스 그림자 설정 */
-			background-color: #fdfdfd;
-			/* 박스 배경색 */
-			top: 400px;
-			width: 600px;
-			height: auto;
-		}
-
-		.form-group {
-			/* 각 폼 그룹의 하단 마진을 설정합니다. */
-			margin-bottom: 30px;
-			/* 폼 그룹 내의 항목들을 플렉스 박스로 배치합니다. */
-			display: flex;
-			/* 폼 그룹 내 항목들을 수직 중앙에 정렬합니다. */
-			align-items: center;
-			/* 줄바꿈을 허용 */
-			flex-wrap: wrap;
-		}
-
-		.check_font {
-			position: relative;
-			left: 165px;
-			flex-basis: 100%;
-			/* 이 요소만 한 줄을 차지하게 함 */
-			margin-top: 0px;
-			margin-bottom: 0px;
-		}
-
-		.check_font {
-			font-size: 12px;
-			/* 메시지 크기 조정 */
-			color: red;
-			/* 기본 메시지 색상 설정 */
-			margin-top: 5px;
-			/* 메시지와 입력 필드 사이의 여백 */
-		}
-
-		.form-group label {
-			/* 라벨의 너비를 150px로 설정합니다. */
-			width: 150px;
-			/* 라벨과 입력 필드 사이의 여백을 설정합니다. */
-			margin-right: 10px;
-			/* 라벨의 글씨를 두껍게 설정합니다. */
-			font-weight: bold;
-		}
-
-		.form-group input {
-			flex: 1;
-			/* 입력 필드가 남은 공간을 모두 차지하도록 설정합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			border: 1px solid #ccc;
-			/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-		}
-
-		.form-group input:focus{
-				border-color: #ff4714;
-				outline: none;
-			}
 
 		.file-upload label {
 			display: inline-block;
@@ -180,53 +38,7 @@
 			border: 0;
 		}
 
-		.form-group button {
-			background-color: #ff4714;
-			/* 버튼의 배경색을 주황색으로 설정합니다. */
-			color: #fff;
-			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-			border: none;
-			/* 버튼의 기본 테두리를 제거합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			margin-left: 20px;
-		}
 
-		.form-group input {
-			width: 200px;
-
-		}
-
-		.submit_btn button {
-			background-color: #ff4714;
-			/* 버튼의 배경색을 주황색으로 설정합니다. */
-			color: #fff;
-			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-			border: none;
-			/* 버튼의 기본 테두리를 제거합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			margin-left: 20px;
-		}
-
-		select {
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			border: 1px solid #ccc;
-			/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-		}
-
-		button:hover {
-			color: #ffffffcc;
-		}
-
-		.submit_btn button {
-			position: relative;
-			left: 30%;
-			width: calc(100% - 70%);
-			text-align: center;
-			height: 40px;
-		}
 
 		/* Date 입력 필드 스타일 */
 		input[type="date"],
@@ -251,14 +63,14 @@
 
 		.form-group label #fileUpload {
 			background-color: #ff4714;
-				/* 버튼의 배경색을 주황색으로 설정합니다. */
-				color: #fff;
-				/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-				border: none;
-				/* 버튼의 기본 테두리를 제거합니다. */
-				padding: 8px;
-				/* 입력 필드의 내부 여백을 설정합니다. */
-				margin-left: 20px;
+			/* 버튼의 배경색을 주황색으로 설정합니다. */
+			color: #fff;
+			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
+			border: none;
+			/* 버튼의 기본 테두리를 제거합니다. */
+			padding: 8px;
+			/* 입력 필드의 내부 여백을 설정합니다. */
+			margin-left: 20px;
 		}
 
 		#fileUpload {
@@ -284,9 +96,10 @@
 			text-align: center;
 		}
 
-		button:disabled {
-			background-color: #d3d3d3;
-			cursor: not-allowed;
+
+		footer {
+			position: relative;
+			top: 400px;
 		}
 	</style>
 
@@ -323,7 +136,7 @@
 		});
 	</script> -->
 
-<!-- <script>
+	<!-- <script>
 	$(document).ready(function(){
 		// 모든 인풋 필드에서 입력이 발생할 때마다 유효성 검사 수행
 		$("#buz_num , #buz_name,#buz_addr")
@@ -380,60 +193,60 @@
 
 </script> -->
 
-<script  src="../js/jquery.js"></script>
-<script>
-	function chkValue(){
-		var buzNumCheckMessage = $("#buzNumCheckMessage");
-		var buzNameCheckMessage = $("#buzNameCheckMessage");
-		var buzAddrCheckMessage = $("#buzAddrCheckMessage");
-		var buzFileCheckMessage = $("#buzFileCheckMessage");
+	<script src="../js/jquery.js"></script>
+	<script>
+		function chkValue() {
+			var buzNumCheckMessage = $("#buzNumCheckMessage");
+			var buzNameCheckMessage = $("#buzNameCheckMessage");
+			var buzAddrCheckMessage = $("#buzAddrCheckMessage");
+			var buzFileCheckMessage = $("#buzFileCheckMessage");
 
-		
-		
-		// 사업자 번호가 입력되지 않았을 때
-		if(frm.buz_num.value.trim() === "") {
-			buzNumCheckMessage.text("사업자 번호를 입력해주세요").css("color", "red");
-			frm.buz_num.focus();
-			return false;
-		} else {
-			buzNumCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
-		}
-		if(frm.buz_name.value.trim() === "") {
-			buzNameCheckMessage.text("사업자 상호명을 입력해주세요").css("color", "red");
-			frm.buz_name.focus();
-			return false;
-		} else {
-			buzNameCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
-		}
-		if(frm.buz_addr.value.trim() === "") {
-			buzAddrCheckMessage.text("사업자 번호를 입력해주세요").css("color", "red");
-			frm.buz_Addr.focus();
-			return false;
-		} else {
-			buzAddrCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
+
+
+			// 사업자 번호가 입력되지 않았을 때
+			if (frm.buz_num.value.trim() === "") {
+				buzNumCheckMessage.text("사업자 번호를 입력해주세요").css("color", "red");
+				frm.buz_num.focus();
+				return false;
+			} else {
+				buzNumCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
+			}
+			if (frm.buz_name.value.trim() === "") {
+				buzNameCheckMessage.text("사업자 상호명을 입력해주세요").css("color", "red");
+				frm.buz_name.focus();
+				return false;
+			} else {
+				buzNameCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
+			}
+			if (frm.buz_addr.value.trim() === "") {
+				buzAddrCheckMessage.text("사업자 번호를 입력해주세요").css("color", "red");
+				frm.buz_Addr.focus();
+				return false;
+			} else {
+				buzAddrCheckMessage.text("");  // 입력이 있으면 에러 메시지 초기화
+			}
+
+			// 파일이 첨부되지 않았을 때 (fileUpload 필드 확인)
+			if (!frm.fileUploadName.value) {
+				buzFileCheckMessage.text("사업자 등록증을 첨부해주세요").css("color", "red");
+				return false;
+			} else {
+				buzFileCheckMessage.text("");  // 정상 입력 시 에러 메시지 초기화
+			}
+
+			// 모든 검사를 통과하면 true 반환 (폼 제출 가능)
+			return true;
 		}
 
-		// 파일이 첨부되지 않았을 때 (fileUpload 필드 확인)
-		if (!frm.fileUploadName.value) {
-			buzFileCheckMessage.text("사업자 등록증을 첨부해주세요").css("color", "red");
-			return false;
-		} else {
-			buzFileCheckMessage.text("");  // 정상 입력 시 에러 메시지 초기화
-		}
-
-		// 모든 검사를 통과하면 true 반환 (폼 제출 가능)
-		return true;
-	}
-
-	// 유효성 검사에 따라 제출 버튼 활성화
-    $("input").on('input change', function () {
-        var isValid = chkValue(); // 입력값 유효성 확인
-        if (isValid) {
-            $("#submit").attr("disabled", false);
-        } else {
-            $("#submit").attr("disabled", true);
-        }
-    });
+		// 유효성 검사에 따라 제출 버튼 활성화
+		$("input").on('input change', function () {
+			var isValid = chkValue(); // 입력값 유효성 확인
+			if (isValid) {
+				$("#submit").attr("disabled", false);
+			} else {
+				$("#submit").attr("disabled", true);
+			}
+		});
 		//파일 이름 및 확장자 분리 파일 형식 및 용량 제한
 		$(function () {
 			$("#fileUpload").on('change', function () {
@@ -443,7 +256,7 @@
 			}); // 닫는 괄호 수정
 		});
 
-</script>
+	</script>
 
 	<body>
 		<header>
@@ -464,27 +277,27 @@
 			</div>
 			<div class="content">
 				<div class="container">
-					<form method="post" name="frm" action="/view_jm/sellerJoinInfo_2" enctype="multipart/form-data" onsubmit="return chkValue();">
-						
+					<form method="post" name="frm" action="/view_jm/sellerJoinInfo_2" enctype="multipart/form-data"
+						onsubmit="return chkValue();">
+
 						<!-- 사업자 번호  -->
 						<div class="form-group">
 							<label for="buz_num">사업자 번호</label>
-							<input type="text" id="buz_num" name="buz_num" 
-								maxlength="14"> <!-- 하이픈 포함 길이 14 -->
-								<p class="check_font" id="buzNumCheckMessage"></p>
+							<input type="text" id="buz_num" name="buz_num" maxlength="14"> <!-- 하이픈 포함 길이 14 -->
+							<p class="check_font" id="buzNumCheckMessage"></p>
 						</div>
 
 						<!-- 사업자 상호명 -->
 						<div class="form-group">
 							<label for="buz_name">사업자 상호명</label>
-							<input type="text" id="buz_name" name="buz_name" >
+							<input type="text" id="buz_name" name="buz_name">
 							<p class="check_font" id="buzNameCheckMessage"></p>
 						</div>
 
 						<!-- 사업자 주소 -->
 						<div class="form-group">
 							<label for="buz_addr">사업자 주소</label>
-							<input type="text" id="buz_addr" name="buz_addr" >
+							<input type="text" id="buz_addr" name="buz_addr">
 							<p class="check_font" id="buzAddrCheckMessage"></p>
 						</div>
 
@@ -498,8 +311,11 @@
 						</div>
 
 						<!-- 제출 버튼 -->
-						<div class="submit_btn">
-							<button type="submit" id="submit">다음</button>
+						<div class="form-gruop">
+							<div class="moveBtn">
+								<a href="/view_jm/buyerJoinAgree"><button id="backBtn" type="reset">이전</button></a>
+								<a href="/view_jm/sellerJoinInfo_2"><button type="submit" id="submitBtn">다음</button></a>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -509,5 +325,4 @@
 			<%@ include file="../footer.jsp" %>
 		</footer>
 	</body>
-
 	</html>

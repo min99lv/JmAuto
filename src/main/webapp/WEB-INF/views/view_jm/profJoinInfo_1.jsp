@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<link href="../css/join.css" rel="stylesheet" type="text/css">
 	<!DOCTYPE html>
 	<html>
 	<head>
@@ -7,225 +7,11 @@
 		<title>Insert title here</title>
 	</head>
 	<style>
-		body,html {
-			margin: 0;
-				/* 브라우저 기본 여백을 제거 */
-				padding: 0;
-				/* 브라우저 기본 패딩을 제거 */
-				height: 100%;
-				/* 화면 높이를 100%로 설정 */
-				background-color: #fafafa;
-				/* 페이지의 배경색을 연한 회색으로 설정합니다. */
-				font-family: Pretendard;
-		}
-
-		.contents {
-			align-items: center;
-			/* 수직 중앙 정렬 */
-			height: 100vh;
-			/* 뷰포트 높이 100%로 설정 */
-			padding-bottom: 300px;
-		}
-
-		.content {
-			display: flex;
-			flex-direction: column; /* 세로 방향으로 배치 */
-			align-items: center; /* 수평 중앙 정렬 */
-			justify-content: center; /* 수직 중앙 정렬 */
-		}
-
-		/* 제목 스타일 */
-		h1 {
-			position: absolute;
-			top: 150px;
-			text-align: center;
-			color: #313131;
-		}
-
-		.join_step {
-			display: flex;
-			position: absolute;
-			/* 플렉스 박스 레이아웃 사용 */
-			top: 200px;
-			justify-content: center;
-			/* 가로 가운데 정렬 */
-			list-style: none;
-			/* 리스트 스타일 제거 */
-			padding: 0;
-			/* 기본 패딩 제거 */
-			margin-bottom: 30px;
-		}
-
-		.join_step li {
-			margin: 0 10px;
-			/* 항목 간의 간격 설정 */
-			position: relative;
-			/* 텍스트 위치를 조정하기 위해 relative 유지 */
-		}
-
-		.join_step li img {
-			width: 150px;
-			/* 리스트 항목 내 이미지의 크기를 설정 */
-		}
-
-		.join_step li span {
-			position: absolute;
-			/* 텍스트를 절대 위치로 설정 */
-			bottom: 0;
-			left: 50%;
-			/* 텍스트를 중앙 하단에 위치 */
-			color: #666;
-			/* 텍스트 색상 설정 */
-			line-height: 1.462em;
-			/* 텍스트 줄 간격 설정 */
-			white-space: nowrap;
-			/* 텍스트가 줄바꿈되지 않도록 설정 */
-			transform: translate(-50%, 0);
-			/* 텍스트를 중앙 정렬 */
-		}
-
-		/* 회원가입 폼을 감싸는 컨테이너 스타일 */
-		.container {
-			display: flex;
-			flex-direction: column;
-			position: absolute;
-			gap: 40px;
-			/* 박스들 사이의 간격 */
-			padding: 100px;
-			/* 컨테이너 내부 여백 */
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			/* 박스 그림자 설정 */
-			background-color: #fdfdfd;
-			/* 박스 배경색 */
-			top: 400px;
-			width: 600px;
-			height: auto;
-		}
-
-		.form-group {
-			/* 각 폼 그룹의 하단 마진을 설정합니다. */
-			margin-bottom: 30px;
-			/* 폼 그룹 내의 항목들을 플렉스 박스로 배치합니다. */
-			display: flex;
-			/* 폼 그룹 내 항목들을 수직 중앙에 정렬합니다. */
-			align-items: center;
-			/* 줄바꿈을 허용 */
-			flex-wrap: wrap;
-		}
-
-		.check_font {
-			position: relative;
-			left: 165px;
-			flex-basis: 100%;
-			/* 이 요소만 한 줄을 차지하게 함 */
-			margin-top: 0px;
-			margin-bottom: 0px;
-		}
-
-		.check_font {
-			font-size: 12px;
-			/* 메시지 크기 조정 */
-			color: red;
-			/* 기본 메시지 색상 설정 */
-			margin-top: 5px;
-			/* 메시지와 입력 필드 사이의 여백 */
-		}
-
-		.form-group label {
-			/* 라벨의 너비를 150px로 설정합니다. */
-			width: 150px;
-			/* 라벨과 입력 필드 사이의 여백을 설정합니다. */
-			margin-right: 10px;
-			/* 라벨의 글씨를 두껍게 설정합니다. */
-			font-weight: bold;
-		}
-
-		.form-group input {
-			flex: 1;
-			/* 입력 필드가 남은 공간을 모두 차지하도록 설정합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			border: 1px solid #ccc;
-			/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-		}
 
 		.form-group input:focus{
 				border-color: #ff4714;
 				outline: none;
 			}
-
-		.file-upload label {
-			display: inline-block;
-			padding: 0.5em 0.75em;
-			color: #999;
-			font-size: inherit;
-			line-height: normal;
-			vertical-align: middle;
-			background-color: #fdfdfd;
-			cursor: pointer;
-			border: 1px solid #ebebeb;
-			border-bottom-color: #e2e2e2;
-			border-radius: 0.25em;
-		}
-
-		.file-upload input[type="file"] {
-			position: absolute;
-			width: 1px;
-			height: 1px;
-			padding: 0;
-			margin: -1px;
-			overflow: hidden;
-			clip: rect(0, 0, 0, 0);
-			border: 0;
-		}
-
-		.form-group button {
-			background-color: #ff4714;
-			/* 버튼의 배경색을 주황색으로 설정합니다. */
-			color: #fff;
-			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-			border: none;
-			/* 버튼의 기본 테두리를 제거합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			margin-left: 20px;
-		}
-
-		.form-group input {
-			width: 200px;
-
-		}
-
-		.submit_btn button {
-			background-color: #ff4714;
-			/* 버튼의 배경색을 주황색으로 설정합니다. */
-			color: #fff;
-			/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-			border: none;
-			/* 버튼의 기본 테두리를 제거합니다. */
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			margin-left: 20px;
-		}
-
-		select {
-			padding: 8px;
-			/* 입력 필드의 내부 여백을 설정합니다. */
-			border: 1px solid #ccc;
-			/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-		}
-
-		button:hover {
-			color: #ffffffcc;
-		}
-
-		.submit_btn button {
-			position: relative;
-			left: 30%;
-			width: calc(100% - 70%);
-			text-align: center;
-			height: 40px;
-		}
 
 		/* Date 입력 필드 스타일 */
 		input[type="date"],
@@ -238,26 +24,19 @@
 			/* 글씨 색상 설정 */
 		}
 
-		/* 파일 업로드 레이블 스타일 (사용자에게 보이는 텍스트 부분) */
-		.fileUpload label {
-			font-family: "Pretendard", sans-serif;
-			/* 원하는 글씨체로 설정 */
-			font-size: 13px;
-			/* 글씨 크기 설정 */
-			color: #333;
-			/* 글씨 색상 설정 */
-		}
-
 		.form-group label #fileUpload {
-			background-color: #ff4714;
-				/* 버튼의 배경색을 주황색으로 설정합니다. */
-				color: #fff;
+				background-color: #ff4714;
+				/* 버튼의 배경색을 주황색으로 설정합니 다. */
+				color: #fdfdfd;
 				/* 버튼의 글씨 색을 흰색으로 설정합니다. */
 				border: none;
 				/* 버튼의 기본 테두리를 제거합니다. */
 				padding: 8px;
 				/* 입력 필드의 내부 여백을 설정합니다. */
 				margin-left: 20px;
+				height: 53px;
+				font-size: 12px;
+				font-weight: bold;
 		}
 
 		#fileUpload {
@@ -283,10 +62,13 @@
 			text-align: center;
 		}
 
-		button:disabled {
-			background-color: #d3d3d3;
-			cursor: not-allowed;
-		}
+
+
+		
+		footer {
+				position: relative;
+				top: 400px;
+			}
 	</style>
 
 	<script type="text/javascript" src="/js/jquery.js"></script>
@@ -356,9 +138,9 @@
 
         // 모든 입력 값이 유효하면 버튼 활성화, 아니면 비활성화
         if (isValid) {
-            $("#submit").attr("disabled", false);
+            $("#submitBtn").attr("disabled", false);
         } else {
-            $("#submit").attr("disabled", true);
+            $("#submitBtn").attr("disabled", true);
         }
 
         // 폼 제출 가능 여부 반환 (true이면 제출, false이면 제출 막음)
@@ -448,16 +230,18 @@
 						<div class="form-group">
 							<label for="file">자격증 파일</label>
 							<input  name="fileUploadName" id="fileUploadName">
-							<label for="fileUpload" style="font-weight: normal;">파일찾기</label>
+							<label for="fileUpload" style="font-weight: normal; height: 20px; font-size: 15px;" id="fileUpload1">파일찾기</label>
 							<input type="file" id="fileUpload" name="fileUpload">
 							<p class="check_font" id="certFileCheckMessage"></p>
 						</div>
 
 						<!-- 제출 버튼 -->
-						<div class="submit_btn">
-							<button type="submit" id="submit" disabled>다음</button>
+						<div class="form-gruop">
+							<div class="moveBtn">
+								<a href="/view_jm/buyerJoinAgree"><button id="backBtn" type="reset" >이전</button></a>
+								<a href="/view_jm/profJoinInfo_2"><button type="submit" id="submitBtn">다음</button></a>
+							</div>
 						</div>
-					</form>
 <!-- /form-->
 				</div>
 			</div>

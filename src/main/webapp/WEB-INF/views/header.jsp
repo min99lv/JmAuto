@@ -128,7 +128,7 @@ a{
                 </c:when>
                 <c:otherwise>
                     <!-- 세션이 없을 때: 회원가입과 로그인 버튼 -->
-                    <a class="menu_login" href="/view_jh/home">회원가입</a>
+                    <a class="menu_login" href="/view_jm/joinType">회원가입</a>
                     <button class="but_login">
                         <a href="/view_jm/login">로그인</a>
                     </button>

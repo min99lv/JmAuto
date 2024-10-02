@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<link href="../css/join.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 
@@ -7,202 +8,101 @@
 <meta charset="UTF-8">
 <title>약관 동의</title>
 <style>
-	body {
-		margin: 0;
-		padding: 0;
-		background-color: #fafafa;
-		font-family: Pretendard;
-		min-height: 100vh;
-		/* 화면 높이에 맞추어 최소 높이 설정 */
-	}
+			/* 폼 그룹 스타일 */
+			.form-group {
+				/* 블록 요소로 설정하여 세로 정렬 */
+				display: block;
+			}
 
-	.contents {
-		align-items: center;
-		/* 수직 중앙 정렬 */
-		height: 100vh;
-		/* 뷰포트 높이 100%로 설정 */
-		padding-bottom: 500px;
-	}
+			/* 텍스트 상자 스타일 */
+			.text {
+				/* 자동으로 너비 설정 */
+				width: auto;
+				/* 텍스트 박스의 높이 */
+				height: 300px;
+				/* 텍스트 박스 하단 여백 */
+				margin-bottom: 10px;
+				/* 폰트 설정 */
+				font-family: Pretendard;
+				/* 테두리 설정 */
+				border: solid 1px #ddd;
+				/* 텍스트 정렬 */
+				text-align: left;
+				/* 세로 스크롤 생성 */
+				overflow-y: scroll;
+				/* 공백을 줄바꿈으로 표시 */
+				white-space: pre-line;
+				/* 폰트 크기 설정 */
+				font-size: 15px;
+				/* 텍스트 박스 내부 여백 설정 */
+				padding: 10px 8px;
+			}
 
-	.content {
-		display: flex;
-		flex-direction: column;
-		/* 세로 방향으로 배치 */
-		align-items: center;
-		/* 수평 중앙 정렬 */
-		justify-content: center;
-		/* 수직 중앙 정렬 */
-	}
+			/* 체크박스 스타일 */
+			input[type="checkbox"] {
+				/* 체크박스 오른쪽 여백 */
+				margin-right: 10px;
+				/* 체크박스 강조 색상 */
+				accent-color: #ff4714;
+				/* 체크박스 너비와 높이 */
+				width: 20px;
+				height: 20px;
+			}
 
-	/* 제목 스타일 */
-	h1 {
-		position: absolute;
-		top: 150px;
-		text-align: center;
-		color: #313131;
-	}
+			/* 강조 텍스트 스타일 */
+			strong {
+				/* 텍스트 색상 빨간색으로 변경 */
+				color: red;
+			}
 
-	.join_step {
-		display: flex;
-		position: absolute;
-		/* 플렉스 박스 레이아웃 사용 */
-		top: 200px;
-		justify-content: center;
-		/* 가로 가운데 정렬 */
-		list-style: none;
-		/* 리스트 스타일 제거 */
-		padding: 0;
-		/* 기본 패딩 제거 */
-		margin-bottom: 30px;
-	}
+			/* 필수 동의 항목 제목 스타일 */
+			.agree {
+				/* 글자 두께 굵게 */
+				font-weight: bold;
+				/* 폰트 크기 설정 */
+				font-size: 20px;
+			}
 
-	.join_step li {
-		margin: 0 10px;
-		/* 항목 간의 간격 설정 */
-		position: relative;
-		/* 텍스트 위치를 조정하기 위해 relative 유지 */
-	}
+			/* 체크박스 항목 오른쪽에 텍스트 배치 */
+			.check {
+				/* 오른쪽으로 정렬 */
+				float: right;
+				/* 폰트 크기 설정 */
+				font-size: 18px;
+			}
 
+			/* 체크박스 버튼 위치 설정 */
+			.checkBtn {
+				/* 상대적인 위치 지정 */
+				position: relative;
+				/* 약간 위로 이동 */
+				top: 3px;
+			}
 
-	.join_step li img {
-		width: 150px;
-		/* 리스트 항목 내 이미지의 크기를 설정 */
-	}
-
-	.join_step li span {
-		position: absolute;
-		/* 텍스트를 절대 위치로 설정 */
-		bottom: 0;
-		left: 50%;
-		/* 텍스트를 중앙 하단에 위치 */
-		color: #666;
-		/* 텍스트 색상 설정 */
-		line-height: 1.462em;
-		/* 텍스트 줄 간격 설정 */
-		white-space: nowrap;
-		/* 텍스트가 줄바꿈되지 않도록 설정 */
-		transform: translate(-50%, 0);
-		/* 텍스트를 중앙 정렬 */
-	}
-
-	/* 회원가입 폼을 감싸는 컨테이너 스타일 */
-	.container {
-		display: flex;
-		flex-direction: column;
-		position: absolute;
-		top: 400px;
-		gap: 40px;
-		/* 박스들 사이의 간격 */
-		height: auto;
-		padding: 100px;
-		/* 컨테이너 내부 여백 */
-		width: 600px;
-		background-color: #fdfdfd;
-		/* 박스 배경색 */
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		/* 박스 그림자 설정 */
-		margin-bottom: 100px;
-	}
-
-	/* 폼 그룹 스타일 */
-	.form-group {
-		display: block;
-	}
-
-	textarea {
-		width: 100%;
-		height: 150px;
-		margin-bottom: 10px;
-		font-family: Pretendard;
-		border: solid 1px #ddd;
-		text-align: left;
-	}
-
-	.text{
-		width: 100%;
-		height: 150px;
-		margin-bottom: 10px;
-		font-family: Pretendard;
-		border: solid 1px #ddd;
-		text-align: left;
-		overflow-y: scroll;
-		white-space: pre-line; 
-		font-size: 15px;
-
-	}
-
-	input[type="checkbox"] {
-		margin-right: 10px;
-		accent-color: #ff4714;
-	}
-
-	.button {
-		text-align: center;
-	}
-
-	button {
-		text-align: center;
-		width: calc(100% - 70%);
-		/* 제출 버튼의 너비를 컨테이너 너비에서 20px 줄여서 설정 */
-		color: white;
-		/* 제출 버튼의 글자 색을 흰색으로 설정 */
-		background-color: #ff4714;
-		/* 제출 버튼의 배경색을 주황색으로 설정 */
-		height: 40px;
-		/* 제출 버튼의 높이를 40px로 설정 */
-		padding: 10px;
-		/* 제출 버튼 내부 여백을 10px로 설정 */
-		border: none;
-		/* 제출 버튼의 테두리를 제거 */
-		font-weight: bold;
-		/* 제출 버튼의 글자를 굵게 설정 */
-		transition: background-color 0.3s;
-		/* 배경색 변환을 부드럽게 0.3초 동안 적용 */
-		cursor: pointer;
-
-	}
-
-	strong {
-		color: red;
-	}
-
-	.agree {
-		font-weight: bold;
-	}
-
-	.check {
-		float: right;
-	}
-
-	button:disabled {
-		background-color: #d3d3d3;
-		cursor: not-allowed;
-	}
-
-	.move {
-		text-align: center;
-
-	}
+			footer{
+				top: 1000px;
+			}
 </style>
 <script>
-	function toggleButton() {
-		// 체크박스가 체크되었는지 확인
-		const checkBox1 = document.getElementById('agree1');
-		const checkBox2 = document.getElementById('agree2');
-		const nextButton = document.getElementById('nextButton');
+		function toggleButton() {
+				// 체크박스가 체크되었는지 확인
+				const checkBox1 = document.getElementById('agree1');
+				const checkBox2 = document.getElementById('agree2');
+				const submitBtn = document.getElementById('submitBtn');
 
-		// 체크박스 체크 여부에 따라 버튼 활성/비활성화
-		if (checkBox1.checked && checkBox2.checked) {
-			nextButton.disabled = false; // 활성화
-		} else {
-			nextButton.disabled = true; // 비활성화
-		}
-	}
+				// 체크박스 체크 여부에 따라 버튼 활성/비활성화
+				if (checkBox1.checked && checkBox2.checked) {
+					submitBtn.disabled = false; // 활성화
+				} else {
+					submitBtn.disabled = true; // 비활성화
+				}
+			}
 
-	// 페이지 로드 시 버튼 비활성화 상태로 시작
-	window.onload = function() {
-		document.getElementById('nextButton').disabled = true;
-	};
+			// 페이지 로드 시 버튼 비활성화 상태로 시작
+			window.onload = function () {
+				document.getElementById('submitBtn').disabled = true;
+			};
+
 </script>
 </head>
 
@@ -367,12 +267,10 @@
 						</div>
 					</div>
 					<div class="form-gruop">
-					<div class="move">
-						<button>
-							<a href="/">취소</a>
-						</button>
-							<a href="/view_jm/sellerJoinInfo_1"><button id="nextButton">다음</button></a>					
-					</div>
+						<div class="moveBtn">
+							<a href="/"><button id="backBtn">취소</button></a>
+							<a href="/view_jm/sellerJoinInfo_1"><button id="submitBtn">다음</button></a>
+						</div>
 					</div>
 				</div>
 			</div>

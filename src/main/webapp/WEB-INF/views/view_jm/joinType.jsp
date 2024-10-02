@@ -47,11 +47,12 @@ h1 {
 	top: 250px;
 	align-items: center; /* 박스들을 수직으로 중앙 정렬 */
 	gap: 40px; /* 박스들 사이의 간격 */
-	height: 400px;
-	width: 800px;
-	padding: 50px; /* 컨테이너 내부 여백 */
+	height: 600px;
+	width: 1000px;
+	padding: 40px; /* 컨테이너 내부 여백 */
 	background-color: #fdfdfd; /* 박스 배경색 */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 박스 그림자 설정 */
+	margin: 70px 0;
 }
 
 /* 각 박스의 기본 스타일 설정 */
@@ -63,6 +64,7 @@ h1 {
 	cursor: pointer; /* 마우스 커서를 손 모양으로 변경 */
 	transition: transform 0.2s; /* 박스 확대 효과에 대한 부드러운 전환 */
 	color: #ff4714;
+	height: 200px;
 }
 
 /* 박스에 마우스를 올리면 확대되는 효과 */

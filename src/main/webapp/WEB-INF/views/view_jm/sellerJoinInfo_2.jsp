@@ -1,173 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<link href="../css/join.css" rel="stylesheet" type="text/css">
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-body, html {
-	margin: 0; /* 브라우저 기본 여백을 제거 */
-	padding: 0; /* 브라우저 기본 패딩을 제거 */
-	height: 100%; /* 화면 높이를 100%로 설정 */
-	background-color: #fafafa; /* 페이지의 배경색을 연한 회색으로 설정합니다. */
-	font-family: Pretendard;
-}
+	.form-group input[type="text"]:focus,
+			input[type="password"]:focus {
+				border-color: #ff4714;
+				outline: none;
+			}
 
-.contents {
-	align-items: center;/* 수직 중앙 정렬 */
-	height: 1000px; /* 뷰포트 높이 100%로 설정 */
-	padding-bottom: 600px;
-}
+			.form-group button {
+				background-color: #ff4714;
+				/* 버튼의 배경색을 주황색으로 설정합니 다. */
+				color: #fdfdfd;
+				/* 버튼의 글씨 색을 흰색으로 설정합니다. */
+				border: none;
+				/* 버튼의 기본 테두리를 제거합니다. */
+				padding: 8px;
+				/* 입력 필드의 내부 여백을 설정합니다. */
+				margin-left: 20px;
+				height: 53px;
+				font-size: 12px;
+				font-weight: bold;
+			}
 
-.content {
-	display: flex;
-	flex-direction: column; /* 세로 방향으로 배치 */
-	align-items: center; /* 수평 중앙 정렬 */
-	justify-content: center; /* 수직 중앙 정렬 */
-}
+			select {
+				padding: 8px;
+				/* 입력 필드의 내부 여백을 설정합니다. */
+				border: 1px solid #ccc;
+				/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
+				width: 25%;
+			}
 
-/* 제목 스타일 */
-h1 {
-	position: absolute;
-	top: 150px;
-	text-align: center;
-	color: #313131;
-}
 
-.join_step {
-	display: flex;
-	position: absolute;
-	/* 플렉스 박스 레이아웃 사용 */
-	top: 200px;
-	justify-content: center;
-	/* 가로 가운데 정렬 */
-	list-style: none;
-	/* 리스트 스타일 제거 */
-	padding: 0;
-	/* 기본 패딩 제거 */
-	margin-bottom: 30px;
-}
+			#user_email3 {
+				width: 50px;
+			}
 
-.join_step li {
-	margin: 0 10px;
-	/* 항목 간의 간격 설정 */
-	position: relative;
-	/* 텍스트 위치를 조정하기 위해 relative 유지 */
-}
+			.container button {
+				height: 35px;
+			}
 
-.join_step li img {
-	width: 150px;
-	/* 리스트 항목 내 이미지의 크기를 설정 */
-}
-
-.join_step li span {
-	position: absolute;
-	/* 텍스트를 절대 위치로 설정 */
-	bottom: 0;
-	left: 50%;
-	/* 텍스트를 중앙 하단에 위치 */
-	color: #666;
-	/* 텍스트 색상 설정 */
-	line-height: 1.462em;
-	/* 텍스트 줄 간격 설정 */
-	white-space: nowrap;
-	/* 텍스트가 줄바꿈되지 않도록 설정 */
-	transform: translate(-50%, 0);
-	/* 텍스트를 중앙 정렬 */
-}
-/* 로그인 폼을 감싸는 컨테이너 */
-.container {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	top: 400px;
-	gap: 40px; /* 박스들 사이의 간격 */
-	background-color: #fdfdfd; /* 컨테이너의 배경색을 흰색에 가까운 연한 회색으로 설정합니다. */
-	width: 600px; /* 컨테이너의 최대 너비를 600px로 설정합니다. */
-	padding: 100px; /* 컨테이너의 내부 여백을 설정합니다. */
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-	/* 컨테이너에 미세한 그림자를 추가하여 입체감을 줍니다. */
-}
-
-.form-group {
-	margin-bottom: 30px; /* 각 폼 그룹의 하단 마진을 설정합니다. */
-	display: flex; /* 폼 그룹 내의 항목들을 플렉스 박스로 배치합니다. */
-	align-items: center; /* 폼 그룹 내 항목들을 수직 중앙에 정렬합니다. */
-	flex-wrap: wrap; /* 줄바꿈을 허용 */
-}
-
-.check_font{
-	position: relative;
-	left: 165px;
-    flex-basis: 100%; /* 이 요소만 한 줄을 차지하게 함 */
-	margin-top: 0px ;
-	margin-bottom: 0px ;
-}
-
-.check_font {
-	font-size: 12px; /* 메시지 크기 조정 */
-	color: red; /* 기본 메시지 색상 설정 */
-	margin-top: 5px; /* 메시지와 입력 필드 사이의 여백 */
-}
-.form-group label {
-	width: 150px; /* 라벨의 너비를 150px로 설정합니다. */
-	margin-right: 10px; /* 라벨과 입력 필드 사이의 여백을 설정합니다. */
-	font-weight: bold; /* 라벨의 글씨를 두껍게 설정합니다. */
-}
-
-.form-group input {
-	flex: 1; /* 입력 필드가 남은 공간을 모두 차지하도록 설정합니다. */
-	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
-	border: 1px solid #ccc; /* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-}
-
-.form-group input[type="text"]:focus, input[type="password"]:focus {
-	border-color: #ff4714;
-	outline: none;
-}
-
-.form-group button {
-	background-color: #ff4714; /* 버튼의 배경색을 주황색으로 설정합니다. */
-	color: #fff; /* 버튼의 글씨 색을 흰색으로 설정합니다. */
-	border: none; /* 버튼의 기본 테두리를 제거합니다. */
-	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
-	margin-left: 20px;
-}
-
-.submit_btn button {
-	background-color: #ff4714; /* 버튼의 배경색을 주황색으로 설정합니다. */
-	color: #fff; /* 버튼의 글씨 색을 흰색으로 설정합니다. */
-	border: none; /* 버튼의 기본 테두리를 제거합니다. */
-	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
-	margin-left: 20px;
-}
-
-select {
-	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
-	border: 1px solid #ccc; /* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-	width: 25%;
-}
-
-button:hover {
-	color: #ffffffcc;
-}
-.submit_btn button{
-	position:relative;
-	left: 30%;
-	width: calc(100% - 70%);
-	text-align: center;
-	height: 40px;
-}
-
-#user_email3{
-	width: 50px;
-}
-
-button:disabled {
-	background-color: #d3d3d3;
-	cursor: not-allowed;
-}
+			footer {
+				position: relative;
+				top: 900px;
+			}
 
 </style>
 <script type="text/javascript" src="../js/jquery.js"></script>
@@ -286,7 +167,7 @@ function validatePasswordConfirm() {
 
     if (password !== passwordConfirm) {
        showError("비밀번호가 일치하지 않습니다.", "#pwConfirmMessage");
-	   $("#submit_btn").attr("disabled", true); // 비밀번호가 일치하지 않으면 버튼 비활성화
+	   $("#submitBtn").attr("disabled", true); // 비밀번호가 일치하지 않으면 버튼 비활성화
 	   return false;
     } 
 		pwConfirmMessage.text("비밀번호가 일치합니다.").css("color", "green");
@@ -381,15 +262,15 @@ function validateEmail() {
 	// 에러 메시지 출력 및 submit 버튼 비활성화
 	function showError(message, elementId) {
     $(elementId).text(message).css("color", "red");
-    $("#submit_btn").attr("disabled", true);
+    $("#submitBtn").attr("disabled", true);
 }
 
 // submit 버튼 활성화
 function enableSubmit() {
     if (validateId() && validatePassword() && validatePasswordConfirm() && validatePhone() && validateEmail()) {
-        $("#submit_btn").attr("disabled", false);
+        $("#submitBtn").attr("disabled", false);
     } else {
-        $("#submit_btn").attr("disabled", true);
+        $("#submitBtn").attr("disabled", true);
     }
 }
 // 이벤트 핸들러
@@ -633,9 +514,12 @@ $(document).ready(function () {
 					</div>
 
 					<!-- 회원가입 버튼 -->
-					<div class="submit_btn">
-						<button type="submit" id="submit_btn">회원가입</button>
-					</div>
+					<div class="form-gruop">
+							<div class="moveBtn">
+								<a href="/view_jm/buyerJoinAgree"><button id="backBtn" type="reset" >이전</button></a>
+								<a href="/view_jm/buyerJoinInfo"><button type="submit" id="submitBtn">회원가입</button></a>
+							</div>
+						</div>
 				</form>
 			</div>
 		</div>

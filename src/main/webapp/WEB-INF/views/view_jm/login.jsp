@@ -19,7 +19,7 @@ body, html {
 
 .container {
     position: relative;
-    left: 1000px;
+    left: 1300px;
     width: 400px; /* 컨테이너의 너비를 400px로 설정 */
     height: 700px; /* 컨테이너의 높이를 600px로 설정 */
     padding: 40px; /* 컨테이너의 내부 여백을 40px로 설정 */
@@ -112,7 +112,8 @@ left: 15px;
 body {
     background-image: url("../images/main/로그인.png");
     background-repeat: no-repeat;
-    background-position: left bottom;
+    
+    background-position: 100px 250px;
 }
 </style>
 

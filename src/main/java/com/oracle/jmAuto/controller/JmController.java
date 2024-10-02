@@ -77,8 +77,7 @@ public class JmController {
 			return "view_jm/login";
 		}
 		 // 탈퇴 상태 확인
-		 System.out.println("탈퇴 상태: " + user_table.getDel_state());
-		String user_id1 = user_table.getUser_id();
+		 System.out.println("탈퇴 상태: " + user_table.getDel_state());String user_id1 = user_table.getUser_id();
 		// 로그인 성공시
 		System.out.println("JmController.login 성공!!!!!");
 
