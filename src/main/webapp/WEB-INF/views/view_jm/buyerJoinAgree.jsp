@@ -19,7 +19,7 @@
 				/* 자동으로 너비 설정 */
 				width: auto;
 				/* 텍스트 박스의 높이 */
-				height: 300px;
+				height: 200px;
 				/* 텍스트 박스 하단 여백 */
 				margin-bottom: 10px;
 				/* 폰트 설정 */
@@ -36,6 +36,7 @@
 				font-size: 15px;
 				/* 텍스트 박스 내부 여백 설정 */
 				padding: 10px 8px;
+				color: gray;
 			}
 
 			/* 체크박스 스타일 */

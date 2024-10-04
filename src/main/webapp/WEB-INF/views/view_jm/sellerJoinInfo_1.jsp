@@ -256,6 +256,40 @@
 			}); // 닫는 괄호 수정
 		});
 
+		$(document).ready(function () {
+    // 각 입력 필드가 모두 입력되었는지 확인하는 함수
+    function checkFormFilled() {
+        // 입력 필드들의 값을 가져오기
+        var buzNum = $("#buz_num").val().trim();
+        var buzName = $("#buz_name").val().trim();
+        var buzAddr = $("#buz_addr").val().trim();
+        var fileUpload = $("#fileUpload").val().trim();
+
+        // 모든 필드에 값이 있을 때만 true 반환
+        if (buzNum !== "" && buzName !== "" && buzAddr !== "" && fileUpload !== "") {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // 입력 필드에 변경이 발생할 때마다 호출
+    $("input").on('input change', function () {
+        // 모든 필드가 입력되었는지 확인
+        if (checkFormFilled()) {
+            // 모든 필드가 입력되었으면 submit 버튼 활성화
+            $("#submitBtn").attr("disabled", false);
+        } else {
+            // 하나라도 비어있으면 submit 버튼 비활성화
+            $("#submitBtn").attr("disabled", true);
+        }
+    });
+
+    // 초기 상태에서 submit 버튼 비활성화
+    $("#submitBtn").attr("disabled", true);
+});
+
+
 	</script>
 
 	<body>

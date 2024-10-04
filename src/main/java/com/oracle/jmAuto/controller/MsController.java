@@ -254,7 +254,9 @@ public class MsController {
 		System.out.println("mscontroller userUpdate start...");
 		User_Table user_table = new User_Table();
 		user_table.setUser_id(user_id);
-		user_table.setUser_pw(user_pw1);
+		// 비밀번호 해쉬화
+		String password = passwordEncoder.encode(user_pw1);
+		user_table.setUser_pw(password);
 		user_table.setUser_tel(user_tel);
 		user_table.setUser_zipcode(user_zipcode);
 		user_table.setUser_addr1(user_addr1);
@@ -267,6 +269,8 @@ public class MsController {
 		System.out.println("user_table->" + user_table);
 		return "view_ms/userUpdate";
 	}
+
+	
 
 	// 구매내역
 	@GetMapping(value = "/view_ms/buyList")
