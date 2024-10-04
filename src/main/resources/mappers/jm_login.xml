@@ -19,7 +19,7 @@
     INSERT INTO user_table
     (user_id, user_pw, user_name, user_tel, user_zipcode, user_addr1, user_addr2, user_email, user_regdate, buz_num, cert_num, user_level, user_type, del_state, approval)
     VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_tel}, #{user_zipcode}, #{user_addr1}, #{user_addr2}, #{user_email}, SYSDATE, #{buz_num, jdbcType=VARCHAR}, #{cert_num, jdbcType=VARCHAR}, #{user_level}, #{user_type}, #{del_state}, #{approval})
-</insert>
+	</insert>
 	
 	<select id="confirmId" resultType="int" parameterType="String">
 	 select count(*)

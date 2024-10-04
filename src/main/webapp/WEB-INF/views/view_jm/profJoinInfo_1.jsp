@@ -73,86 +73,219 @@
 
 	<script type="text/javascript" src="/js/jquery.js"></script>
 	<script>
-	$(document).ready(function () {
-    // 모든 인풋 필드에서 입력이 발생할 때마다 유효성 검사 수행
-    $("#cert_num, #cert_name, #cert_loc, #cert_date, #fileUpload").on("input change", function () {
-        validateForm();
-    });
+	// $(document).ready(function () {
+    // // 모든 인풋 필드에서 입력이 발생할 때마다 유효성 검사 수행
+    // $("#cert_num, #cert_name, #cert_loc, #cert_date, #fileUpload").on("input change", function () {
+    //     validateForm();
+    // });
 
-    // 유효성 검사 함수
-    function validateForm() {
-        var certNum = $("#cert_num").val().trim();
-        var certName = $("#cert_name").val().trim();
-        var certLoc = $("#cert_loc").val().trim();
-        var certDate = $("#cert_date").val().trim();
-        var fileUpload = $("#fileUpload").val().trim();
+    // // 유효성 검사 함수
+    // function validateForm() {
+    //     var certNum = $("#cert_num").val().trim();
+    //     var certName = $("#cert_name").val().trim();
+    //     var certLoc = $("#cert_loc").val().trim();
+    //     var certDate = $("#cert_date").val().trim();
+    //     var fileUpload = $("#fileUpload").val().trim();
 
-        var certNumCheckMessage = $("#certNumCheckMessage");
-        var certNameCheckMessage = $("#certNameCheckMessage");
-        var certLocCheckMessage = $("#certLocCheckMessage");
-        var certDateCheckMessage = $("#certDateCheckMessage");
-        var certFileCheckMessage = $("#certFileCheckMessage");
+    //     var certNumCheckMessage = $("#certNumCheckMessage");
+    //     var certNameCheckMessage = $("#certNameCheckMessage");
+    //     var certLocCheckMessage = $("#certLocCheckMessage");
+    //     var certDateCheckMessage = $("#certDateCheckMessage");
+    //     var certFileCheckMessage = $("#certFileCheckMessage");
 
-        var isValid = true;
+    //     var isValid = true;
 
-        // 자격증 번호 유효성 검사
-        var certNumRegex = /^[0-9]{11}[A-Z]$/;
-        if (!certNumRegex.test(certNum)) {
-            certNumCheckMessage.text("숫자 11자리와 대문자 1자리로 입력해주세요").css("color", "red");
-            isValid = false;
-        } else {
-            certNumCheckMessage.text("");
-        }
+    //     // 자격증 번호 유효성 검사
+    //     var certNumRegex = /^[0-9]{11}[A-Z]$/;
+    //     if (!certNumRegex.test(certNum)) {
+    //         certNumCheckMessage.text("숫자 11자리와 대문자 1자리로 입력해주세요").css("color", "red");
+    //         isValid = false;
+    //     } else {
+    //         certNumCheckMessage.text("");
+    //     }
 
-        // 자격증 이름 확인
-        if (certName === "") {
-            certNameCheckMessage.text("자격증 이름을 입력해주세요").css("color", "red");
-            isValid = false;
-        } else {
-            certNameCheckMessage.text("");
-        }
+    //     // 자격증 이름 확인
+    //     if (certName === "") {
+    //         certNameCheckMessage.text("자격증 이름을 입력해주세요").css("color", "red");
+    //         isValid = false;
+    //     } else {
+    //         certNameCheckMessage.text("");
+    //     }
 
-        // 자격증 발행처 확인
-        if (certLoc === "") {
-            certLocCheckMessage.text("자격증 발행처를 입력해주세요").css("color", "red");
-            isValid = false;
-        } else {
-            certLocCheckMessage.text("");
-        }
+    //     // 자격증 발행처 확인
+    //     if (certLoc === "") {
+    //         certLocCheckMessage.text("자격증 발행처를 입력해주세요").css("color", "red");
+    //         isValid = false;
+    //     } else {
+    //         certLocCheckMessage.text("");
+    //     }
 
-        // 자격증 발행일 확인
-        if (certDate === "") {
-            certDateCheckMessage.text("자격증 발행일을 선택해주세요").css("color", "red");
-            isValid = false;
-        } else {
-            certDateCheckMessage.text("");
-        }
+    //     // 자격증 발행일 확인
+    //     if (certDate === "") {
+    //         certDateCheckMessage.text("자격증 발행일을 선택해주세요").css("color", "red");
+    //         isValid = false;
+    //     } else {
+    //         certDateCheckMessage.text("");
+    //     }
 
-        // 파일 업로드 확인
-        if (fileUpload === "") {
-            certFileCheckMessage.text("자격증 파일을 업로드해주세요").css("color", "red");
-            isValid = false;
-        } else {
-            certFileCheckMessage.text("");
-        }
+    //     // 파일 업로드 확인
+    //     if (fileUpload === "") {
+    //         certFileCheckMessage.text("자격증 파일을 업로드해주세요").css("color", "red");
+    //         isValid = false;
+    //     } else {
+    //         certFileCheckMessage.text("");
+    //     }
 
-        // 모든 입력 값이 유효하면 버튼 활성화, 아니면 비활성화
-        if (isValid) {
-            $("#submitBtn").attr("disabled", false);
-        } else {
-            $("#submitBtn").attr("disabled", true);
-        }
+    //     // 모든 입력 값이 유효하면 버튼 활성화, 아니면 비활성화
+    //     if (isValid) {
+    //         $("#submitBtn").attr("disabled", false);
+    //     } else {
+    //         $("#submitBtn").attr("disabled", true);
+    //     }
 
-        // 폼 제출 가능 여부 반환 (true이면 제출, false이면 제출 막음)
-        return isValid;
-    }
+    //     // 폼 제출 가능 여부 반환 (true이면 제출, false이면 제출 막음)
+    //     return isValid;
+    // }
 
-    // 입력 필드에 maxlength 속성 추가
-    $("#cert_num").attr("maxlength", 12);
-});
+//     // 입력 필드에 maxlength 속성 추가
+//     $("#cert_num").attr("maxlength", 12);
+// });
 
 		// 입력 필드에 maxlength 속성 추가
-		$("#cert_num").attr("maxlength", 12); // 11자리 숫자 + 1자리 알파벳
+	// 	$("#cert_num").attr("maxlength", 12); // 11자리 숫자 + 1자리 알파벳
+	// 	//파일 이름 및 확장자 분리 파일 형식 및 용량 제한
+	// 	$(function () {
+	// 		$("#fileUpload").on('change', function () {
+	// 			var fileName = $("#fileUpload").val();
+	// 			$("#fileUploadName").val(fileName);
+	// 			return;
+	// 		}); // 닫는 괄호 수정
+	// 	});
+
+
+	// 	function chkValue() {
+	// 		var certNumCheckMessage = $("#certNumCheckMessage");
+	// 		var certNameCheckMessage = $("#certNameCheckMessage");
+	// 		var certLocCheckMessage = $("#certLocCheckMessage");
+	// 		var certDateCheckMessage = $("#certDateCheckMessage");
+	// 		var certFileCheckMessage = $("#certFileCheckMessage");
+		
+
+
+	// 	// 자격증 번호가 입력되지 않았을 때
+	// 	if(frm.cert_num.value.trim() === ""){
+	// 		certNumCheckMessage.text("자격증 번호를 입력해주세요").css("color","red");
+	// 		frm.cert_num.focus();
+	// 		return false;
+	// 	}else{
+	// 		// 입력이 있으면 에러 메세지 초기화
+	// 		certNumCheckMessage.text(""); 
+	// 	}
+
+	// 	// 자격증명이 입력되지 않았을 때 
+	// 	if(frm.cert_name.value.trim() === ""){
+	// 		certNameCheckMessage.text("자격증 이름을 입력해주세요").css("color","red");
+	// 		frm.cert_name.focus();
+	// 		return false;
+	// 	}else{
+	// 		// 입력이 있으면 에러 메세지 초기화
+	// 		certNameCheckMessage.text("");
+	// 	}
+
+
+	// 	// 자격증  발행처가 입력되지 않았을 때 
+	// 	if(frm.cert_loc.value.trim() === ""){
+	// 		certLocCheckMessage.text("자격증 이름을 입력해주세요").css("color","red");
+	// 		frm.cert_loc.focus();
+	// 		return false;
+	// 	}else{
+	// 		// 입력이 있으면 에러 메세지 초기화
+	// 		certLocCheckMessage.text("");
+	// 	}
+	// 	// 자격증 발행날짜가 입력되지 않았을 때 
+	// 	if(frm.cert_date.value.trim() === ""){
+	// 		certDateCheckMessage.text("자격증 이름을 입력해주세요").css("color","red");
+	// 		frm.cert_date.focus();
+	// 		return false;
+	// 	}else{
+	// 		// 입력이 있으면 에러 메세지 초기화
+	// 		certDateCheckMessage.text("");
+	// 	}
+
+	// 	return true;
+	// }
+
+
+	function chkValue() {
+    var certNum = $("#cert_num").val().trim();
+    var certName = $("#cert_name").val().trim();
+    var certLoc = $("#cert_loc").val().trim();
+    var certDate = $("#cert_date").val().trim();
+    var fileUpload = $("#fileUpload").val().trim();
+
+    var certNumCheckMessage = $("#certNumCheckMessage");
+    var certNameCheckMessage = $("#certNameCheckMessage");
+    var certLocCheckMessage = $("#certLocCheckMessage");
+    var certDateCheckMessage = $("#certDateCheckMessage");
+    var certFileCheckMessage = $("#certFileCheckMessage");
+
+    var isValid = true;
+
+    // 자격증 번호 유효성 검사
+    if (certNum === "") {
+        certNumCheckMessage.text("자격증 번호를 입력해주세요").css("color", "red");
+        $("#cert_num").focus();
+        isValid = false;
+        return false;  // 첫 번째로 비어있는 필드에서 포커스 중단
+    } else {
+        certNumCheckMessage.text("");
+    }
+
+    // 자격증 이름 유효성 검사
+    if (certName === "") {
+        certNameCheckMessage.text("자격증 이름을 입력해주세요").css("color", "red");
+        $("#cert_name").focus();
+        isValid = false;
+        return false;
+    } else {
+        certNameCheckMessage.text("");
+    }
+
+    // 자격증 발행처 유효성 검사
+    if (certLoc === "") {
+        certLocCheckMessage.text("자격증 발행처를 입력해주세요").css("color", "red");
+        $("#cert_loc").focus();
+        isValid = false;
+        return false;
+    } else {
+        certLocCheckMessage.text("");
+    }
+
+    // 자격증 발행일 유효성 검사
+    if (certDate === "") {
+        certDateCheckMessage.text("자격증 발행일을 선택해주세요").css("color", "red");
+        $("#cert_date").focus();
+        isValid = false;
+        return false;
+    } else {
+        certDateCheckMessage.text("");
+    }
+
+    // 자격증 파일 업로드 확인
+    if (fileUpload === "") {
+        certFileCheckMessage.text("자격증 파일을 업로드해주세요").css("color", "red");
+        $("#fileUpload").focus();
+        isValid = false;
+        return false;
+    } else {
+        certFileCheckMessage.text("");
+    }
+
+    // 모든 입력 값이 유효하면 true 반환 (폼 제출 가능)
+    return isValid;
+}
+
+
 		//파일 이름 및 확장자 분리 파일 형식 및 용량 제한
 		$(function () {
 			$("#fileUpload").on('change', function () {
@@ -161,7 +294,6 @@
 				return;
 			}); // 닫는 괄호 수정
 		});
-
 	</script>
 
 	<body>
@@ -196,12 +328,12 @@
 				<div class="container">
 
 <!-- form -->
-					<form method="post" name="frm" action="/view_jm/profJoinInfo_2" enctype="multipart/form-data" onsubmit="return validateForm()">
+					<form method="post" name="frm" action="/view_jm/profJoinInfo_2" enctype="multipart/form-data"  onsubmit="return chkValue();">
 
 						<!-- 자격증 번호 -->
 						<div class="form-group">
 							<label for="cert_num">자격증 번호</label>
-							<input type="text" id="cert_num" name="cert_num"  maxlength="12">
+							<input type="text" id="cert_num" name="cert_num" maxlength="12">
 							<p class="check_font" id="certNumCheckMessage"></p>
 						</div>
 
