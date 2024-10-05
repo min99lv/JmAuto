@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	
 /* 제목 스타일 */
 #title {
 	position: absolute;
@@ -24,7 +23,6 @@ input[type="checkbox"] {
 .form-group{
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
 
 }
 
@@ -40,13 +38,24 @@ input[type="checkbox"] {
 }
 #submitBtn{
 	position: relative;
-	top: 50px;
+	top: 25px;
 }
 
 a {
  color: white;
  text-decoration-line: none;
 
+}
+
+h4{
+	position: relative;
+	top: 40px;
+	color: gray;
+
+}
+
+footer{
+	top : 100px;
 }
 </style>
 </head>
@@ -71,11 +80,16 @@ a {
 				<div class="container">
 					<div class="form-group">
                             <h1 id="title">회원가입 신청이 완료되었습니다</h1>
+							<h4>신청후 2~3일 내(주말제외)로 신청확인 여부가 이메일로 전송됩니다!</h3>
 					</div>
 					<div class="form-group">
-						<button  id="submitBtn" style="width: 200px;">
-							<a href="/">메인페이지</a>
-						</button>
+						<div class="moveBtn">
+							<a href="/">
+								<button  id="submitBtn">
+								메인페이지
+							</button>
+						</a>
+						</div>
 					</div>
 					</div>
 				</div>

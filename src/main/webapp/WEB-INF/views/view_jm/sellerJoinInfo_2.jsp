@@ -5,49 +5,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기업회원 개인정보 입력</title>
 <style>
-	.form-group input[type="text"]:focus,
-			input[type="password"]:focus {
-				border-color: #ff4714;
-				outline: none;
-			}
 
-			.form-group button {
-				background-color: #ff4714;
-				/* 버튼의 배경색을 주황색으로 설정합니 다. */
-				color: #fdfdfd;
-				/* 버튼의 글씨 색을 흰색으로 설정합니다. */
-				border: none;
-				/* 버튼의 기본 테두리를 제거합니다. */
-				padding: 8px;
-				/* 입력 필드의 내부 여백을 설정합니다. */
-				margin-left: 20px;
-				height: 53px;
-				font-size: 12px;
-				font-weight: bold;
-			}
+	
+.form-group input {
+	flex: 1; /* 입력 필드가 남은 공간을 모두 차지하도록 설정합니다. */
+	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
+	border: 1px solid #ccc; /* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
+}
 
-			select {
-				padding: 8px;
-				/* 입력 필드의 내부 여백을 설정합니다. */
-				border: 1px solid #ccc;
-				/* 입력 필드의 테두리 색을 연한 회색으로 설정합니다. */
-				width: 25%;
-			}
+.form-group input[type="text"]:focus, input[type="password"]:focus {
+	border-color: #ff4714;
+	outline: none;
+}
+
+.form-group button {
+	background-color: #ff4714; /* 버튼의 배경색을 주황색으로 설정합니다. */
+	color: #fff; /* 버튼의 글씨 색을 흰색으로 설정합니다. */
+	border: none; /* 버튼의 기본 테두리를 제거합니다. */
+	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */
+	margin-left: 20px;
+}
 
 
 			#user_email3 {
 				width: 50px;
 			}
 
-			.container button {
-				height: 35px;
-			}
 
 			footer {
-				position: relative;
-				top: 900px;
+				top: 1000px;
 			}
 
 </style>

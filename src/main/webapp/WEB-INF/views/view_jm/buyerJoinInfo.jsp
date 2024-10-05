@@ -5,9 +5,8 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>개인회원 개인정보</title>
 		<style>
-
 			#user_email3 {
 				width: 50px;
 			}
@@ -21,11 +20,6 @@
 		<script type="text/javascript" src="/js/jquery.js"></script>
 		<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		<script type="text/javascript">
-
-			// 상태 변수
-			let isIdConfirmed = false;  // 아이디 중복 확인 상태
-			let isAuthCodeVerified = false;  // 인증번호 확인 상태
-
 
 			// 주소찾기 다음 api
 			function findAddr() {
@@ -45,7 +39,8 @@
 				}).open();
 			}
 
-
+			let isValid = true; // 제출 확인 여부
+			let isIdConfirmed = false; // 아이디 중복 확인 여부
 
 
 			// 아이디 유효성 확인
@@ -56,26 +51,19 @@
 				var idCheckMessage = $("#idCheckMessage");
 
 				idCheckMessage.text(""); // 에러 메시지 초기화
-
-				if (id === "") {
-					showError("아이디를 입력해주세요.", "#idCheckMessage");
-					return false;
-				}
+				isValid = true; // 초기화
 
 				if (id.length < 4 || id.length > 12) {
-					showError("아이디는 4자 이상 12자 이하로 입력해주세요.", "#idCheckMessage");
-					return false;
+					idCheckMessage.text("아이디는 4-12자의 소문자 및 숫자, _로 이루어져야 합니다.").css("color", "red");
+					isValid = false;
+				} else if (!idRegex.test(id)) {
+					idCheckMessage.text("아이디는 소문자로 시작해야 하며, 소문자, 숫자, _만 포함할 수 있습니다.").css("color", "red");
+					isValid = false;
 				}
 
-				if (!idRegex.test(id)) {
-					showError("아이디는 소문자로 시작하고, 소문자, 숫자, _ 만 허용됩니다.", "#idCheckMessage");
-					return false;
-				}
-
-				return true;
+				return isValid; // 결과 반환
 			}
 
-			// 아이디 중복 확인
 			function confirmId() {
 				if (!validateId()) return;
 
@@ -87,264 +75,207 @@
 					success: function (data) {
 						var idCheckMessage = $("#idCheckMessage");
 						if (data === 1) {
-							showError("중복된 아이디 입니다", "#idCheckMessage");
+							// 유효하지 않은 경우
+							idCheckMessage.text("중복된 아이디 입니다").css("color", "red");
 							isIdConfirmed = false;
 						} else {
 							idCheckMessage.text("사용 가능한 아이디입니다.").css("color", "green");
 							isIdConfirmed = true;
 						}
-						enableSubmit();  // 상태 업데이트 후 submit 버튼 활성화 여부 확인
 					}
 				});
 			}
+
 			// 비밀번호 유효성 확인
-			function validatePassword() {
+			function validatePw() {
 				const pwRegex = /^[A-Za-z0-9_@!]{6,12}$/; // 비밀번호: 대소문자, 숫자, _, @, !, 6~12글자
 				var password = $("#user_pw").val().trim();
 				var pwCheckMessage = $("#pwCheckMessage"); // 비밀번호 입력 메시지
 
+
+				isValid = true; // 초기화
 				// 에러 메시지 초기화
 				pwCheckMessage.text("");
 
 				if (password === "") {
-					showError("비밀번호를 입력해주세요.", "#pwCheckMessage");
+					pwCheckMessage.text("비밀번호를 입력해주세요.").css("color", "red");
 					$("#user_pw_confirm").attr("disabled", true); // 비밀번호 확인 비활성화
-					return false;
+					isValid = false;
 				}
 
 				if (password.length < 6 || password.length > 12) {
-					showError("비밀번호는 6자 이상 12자 이하로 입력해주세요.", "#pwCheckMessage");
+					pwCheckMessage.text("비밀번호는 6자 이상 12자 이하로 입력해주세요.").css("color", "red");
 					// 비밀번호 확인 비활성화
 					$("#user_pw_confirm").attr("disabled", true);
-					return false;
+					isValid = false;
 				}
 
 				// 입력 값이 정규 표현식에 맞지 않은 경우
 				if (!pwRegex.test(password)) {
-					showError("비밀번호는 대소문자, 숫자, !, _, @ 만 입력해주세요.", "#pwCheckMessage");
+					pwCheckMessage.text("비밀번호는 6자 비밀번호는 대소문자, 숫자, !, _, @ 만 입력해주세요.").css("color", "red");
 					$("#user_pw_confirm").attr("disabled", true);
-					return false;
+					isValid = false;
 				}
 
 				// 비밀번호가 유효하면 비밀번호 확인 활성화 및 성공 메시지 표시
 				$("#user_pw_confirm").attr("disabled", false);
 				pwCheckMessage.text("사용 가능한 비밀번호입니다.").css("color", "green");
-				return true;
+
+
+				return isValid
 			}
 
 			// 비밀번호 확인 유효성 확인
-			function validatePasswordConfirm() {
+			function validatePwConfirm() {
 				var password = $("#user_pw").val().trim();
 				var passwordConfirm = $("#user_pw_confirm").val().trim();
 				var pwConfirmMessage = $("#pwConfirmMessage"); // 비밀번호 확인 메시지
 
+				isValid = true; // 초기화
 				pwConfirmMessage.text(""); // 에러 메시지 초기화
 
 				if (password !== passwordConfirm) {
-					showError("비밀번호가 일치하지 않습니다.", "#pwConfirmMessage");
-					$("#submitBtn").attr("disabled", true); // 비밀번호가 일치하지 않으면 버튼 비활성화
-					return false;
-				}
-				pwConfirmMessage.text("비밀번호가 일치합니다.").css("color", "green");
-
-				return true;
-			}
-
-
-
-			function validateName() {
-				// 정규 표현식
-				const nameRegex = /^[가-힣]+$/; // 이름: 한글만 허용
-
-				var name = $("#user_name").val().trim();
-				var nameCheckMessage = $("#nameCheckMessage");
-
-				nameCheckMessage.text(""); // 에러 메시지 초기화
-
-				if (!nameRegex.test(name)) {
-					showError("한글을 입력해주세요", "#nameCheckMessage");
-
-					return false;
-				}
-
-
-				return true;
-			}
-			// 전화번호 유효성 확인
-			function validatePhone() {
-				const phoneRegex = /^\d{2,3}-\d{3,4}-\d{4}$/; // 전화번호: XXX-XXXX-XXXX 형식
-				var phone = $("#user_tel").val().trim();
-				var phoneCheckMessage = $("#phoneCheckMessage");
-
-				phoneCheckMessage.text(""); // 에러 메시지 초기화
-
-				if (!phoneRegex.test(phone)) {
-					showError("-를 제외하고 입력해주세요", "#phoneCheckMessage");
-					return false;
-				}
-
-				return true;
-			}
-
-			$(function () {
-				//직접입력 인풋박스 기존에는 숨어있다가
-				$("#user_email3").hide();
-				$("#user_email2").change(function () {
-					//직접입력을 누를 때 나타남
-					if ($("#user_email2").val() == "direct") {
-						$("#user_email3").show();
-						$("#user_email2").css("width", "22px")
-					} else {
-						$("#user_email3").hide();
-						$("#user_email2").css("width", ""); // 기본 크기로 되돌림
-					}
-				})
-			});
-
-
-			// 이메일 유효성 확인 및 전체 이메일을 user_email로 설정
-			function validateEmail() {
-				// const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // 이메일: 기본적인 이메일 형식
-				var email = $("#user_email1").val().trim();
-				var emailDomain = $("#user_email2").val(); // 지정된 도메인 값
-				var emailDirect = $("#user_email3").val().trim(); // 직접 입력한 도메인 값
-
-				if (emailDomain == "direct") {
-					// 직접 입력된 도메인 사용 
-					emailDomain = emailDirect;
-				}
-				// 이메일 전체 합치기
-				var fullEmail = email + "@" + emailDomain;
-				var emailCheckMessage = $("#email_check");
-
-				// 에러 메시지 초기화
-				emailCheckMessage.text("");
-
-				// 이메일 유효성 검사 정규식
-				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-				if (!emailRegex.test(fullEmail)) {
-					showError("유효한 이메일 주소를 입력해주세요.", "#email_check");
-					return false;
-				}
-
-				// 이메일이 유효하면 hidden input에 값을 설정
-				$("#hidden_user_email").val(fullEmail);
-
-				return true;
-			}
-
-			// 에러 메시지 출력 및 submit 버튼 비활성화
-			function showError(message, elementId) {
-				$(elementId).text(message).css("color", "red");
-				$("#submitBtn").attr("disabled", true);
-			}
-
-			// submit 버튼 활성화
-			function enableSubmit() {
-				if (isIdConfirmed && isAuthCodeVerified && validateId() && validatePassword() && validatePasswordConfirm() && validatePhone() && validateEmail()) {
-					$("#submitBtn").attr("disabled", false);
+					pwConfirmMessage.text("비밀번호가 일치하지 않습니다.").css("color", "red");
+					isValid = false;
 				} else {
-					$("#submitBtn").attr("disabled", true);
+					pwConfirmMessage.text("비밀번호가 일치합니다.").css("color", "green");
 				}
-			}
-			// 이벤트 핸들러
-			$(document).ready(function () {
-				$("#user_id").on("input", function () {
-					validateId();
-					confirmId();  // 아이디 중복 확인 호출
-				});
 
-				$("#user_pw").on("input", function () {
-					validatePassword();
-					enableSubmit();
-				});
-
-				$("#user_pw_confirm").on("input", function () {
-					validatePasswordConfirm();
-					enableSubmit();
-				});
-
-				$("#user_name").on("input", function () {
-					validateName();
-					enableSubmit();
-				});
-
-				$("#user_tel").on("input", function () {
-					validatePhone();
-					enableSubmit();
-				});
-
-				$("#user_email1, #user_email2, #user_email3").on("input", function () {
-					validateEmail();
-					enableSubmit();
-				});
-
-
-				$("#verifyAuthCodeBtn").on("click", verifyAuthCode);
-			});
-
-
-			// 이메일 인증 
-			function emailCheck() {
-
-				var emailCheckMessage = $("#email_check");
-
-				$.ajax({
-					url: '/view_jm/sendAuthCode',
-					type: 'POST',
-					data: { 'user_email': $("#hidden_user_email").val() },
-					success: function (response) {
-						emailCheckMessage.text("인증번호가 전송 되었습니다").css("color", "green");
-					},
-					error: function () {
-						emailCheckMessage.text("인증번호가  전송 실패하였습니다.").css("color", "red");
-					}
-				});
+				return isValid;
 			}
 
-			// 인증번호 확인
-			function verifyAuthCode() {
-				var authCode = $("#auth_code").val().trim();
-				$.ajax({
-					url: '/view_jm/verifyAuthCode',
-					type: 'POST',
-					data: { 'auth_code': authCode },
-					success: function (response) {
-						if (response.valid) {
-							$("#verifyAuthCodeMessage").text("인증번호가 확인되었습니다.");
-							$("#verifyAuthCodeMessage").css("color", "green");
-							isAuthCodeVerified = true;
-						} else {
-							$("#verifyAuthCodeMessage").text("인증번호가 틀렸습니다.");
-							$("#verifyAuthCodeMessage").css("color", "red");
-							isAuthCodeVerified = false;
-						}
-						enableSubmit();  // 상태 업데이트 후 submit 버튼 활성화 여부 확인
-					},
-					error: function () {
-						alert("인증번호 확인 중 오류가 발생했습니다.");
-					}
-				});
-			}
 
-			const hypenTel = (target) => {
-				target.value = target.value
-					.replace(/[^0-9]/g, '')
-					.slice(0, 11)                 // 최대 11자리까지만 입력
 
-				// 입력된 값에 맞춰 하이픈 추가
-				if (target.value.length > 10) {
-					// XXX-XXXX-XXXX 형식 (11자리)
-					target.value = target.value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-				} else if (target.value.length > 9) {
-					// XX-XXXX-XXXX 형식 (10자리)
-					target.value = target.value.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
-				} else if (target.value.length > 8) {
-					// XX-XXX-XXXX 형식 (9자리)
-					target.value = target.value.replace(/(\d{2})(\d{3})(\d{4})/, '$1-$2-$3');
+
+
+
+			function chkValue() {
+				var user_id = $("#user_id").val().trim();
+				var user_pw = $("#user_pw").val().trim();
+				var user_pw_comfirm = $("#user_pw_confirm").val().trim();
+				var user_name = $("#user_name").val().trim();
+				var user_tel = $("#user_tel").val().trim();
+				var user_zipcode = $("#user_zipcode").val().trim();
+				var user_addr1 = $("#user_addr1").val().trim();
+				var user_addr2 = $("#user_addr2").val().trim();
+				var hidden_user_email = $("#hidden_user_email").val().trim();
+				var auth_code = $("#auth_code").val().trim();
+
+				var idCheckMessage = $("#idCheckMessage");
+				var pwCheckMessage = $("#pwCheckMessage");
+				var pwConfirmMessage = $("#pwConfirmMessage");
+				var nameCheckMessage = $("#nameCheckMessage");
+				var telCheckMessage = $("#telCheckMessage");
+				var zipcodeCheckMessage = $("#zipcodeCheckMessage");
+				var addr1CheckMessage = $("#addr1CheckMessage");
+				var addr2CheckMessage = $("#addr2CheckMessage");
+				var emailCheckMessage = $("#emailCheckMessage");
+				var verifyAuthCodeMessage = $("#verifyAuthCodeMessage");
+
+				// 기본적인 비어있는지 여부 확인
+				if (!isValid) {
+					return false
 				}
-			};
+
+				// 중복 확인 상태 체크
+				if (!isIdConfirmed) {
+					$("#idCheckMessage").text("아이디 중복 확인을 해주세요.").css("color", "red");
+					$("#user_id").focus();
+					return false; // 중복 확인이 안 되었으므로 제출 금지
+				}
+
+				if (user_id === "") {
+					idCheckMessage.text("아이디를 입력해주세요.").css("color", "red");
+					$("#user_id").focus();
+					isValid = false;
+					return false;
+				} else {
+					idCheckMessage.text("")
+				}
+
+
+				if (user_pw === "") {
+					pwCheckMessage.text("비밀번호를 입력해주세요.").css("color", "red");
+					$("#user_pw").focus();
+					isValid = false;
+					return false;
+				} else {
+					pwCheckMessage.text("")
+				}
+
+
+				if (user_name === "") {
+					pwConfirmMessage.text("비밀번호 확인을 위해 입력해주세요.").css("color", "red");
+					$("#user_pw_confirm").focus();
+					isValid = false;
+					return false;
+				} else {
+					pwConfirmMessage.text("")
+				}
+
+
+				if (user_name === "") {
+					nameCheckMessage.text("이름을 입력해주세요.").css("color", "red");
+					$("#user_name").focus();
+					isValid = false;
+					return false;
+				} else {
+					nameCheckMessage.text("")
+				}
+
+				if (user_tel === "") {
+					telCheckMessage.text("전화번호를 입력해주세요.").css("color", "red");
+					$("#user_tel").focus();
+					isValid = false;
+					return false;
+				} else {
+					telCheckMessage.text("")
+				}
+				if (user_zipcode === "") {
+					zipcodeCheckMessage.text("우편번호를 입력해주세요.").css("color", "red");
+					$("#user_zipcode").focus();
+					isValid = false;
+					return false;
+				} else {
+					zipcodeCheckMessage.text("")
+				}
+				if (user_addr1 === "") {
+					addr1CheckMessage.text("주소를 입력해주세요.").css("color", "red");
+					$("#user_addr1").focus();
+					isValid = false;
+					return false;
+				} else {
+					addr1CheckMessage.text("")
+				}
+				if (user_addr2 === "") {
+					addr2CheckMessage.text("상세주소를 입력해주세요.").css("color", "red");
+					$("#user_addr2").focus();
+					isValid = false;
+					return false;
+				} else {
+					addr2CheckMessage.text("")
+				}
+
+				if (hidden_user_email === "") {
+					emailCheckMessage.text("이메일을 입력해주세요.").css("color", "red");
+					isValid = false;
+					return false;
+				} else {
+					emailCheckMessage.text("")
+				}
+
+				if (auth_code === "") {
+					verifyAuthCodeMessage.text("인증번호를 입력해주세요").css("color", "red");
+					$("#auth_code").focus();
+					isValid = false;
+					return false;
+				} else {
+					verifyAuthCodeMessage.text("")
+				}
+
+				return isValid;
+
+			}
 		</script>
 	</head>
 
@@ -374,12 +305,12 @@
 			</div>
 			<div class="content">
 				<div class="container">
-					<form method="post" name="frm" action="/view_jm/join">
+					<form method="post" name="frm" action="/view_jm/join" onsubmit="return chkValue();">
 
 						<!--  아이디 -->
 						<div class="form-group">
 							<label for="user_id">아이디</label>
-							<input type="text" id="user_id" name="user_id">
+							<input type="text" id="user_id" name="user_id" oninput="validateId()">
 							<button type="button" id="id_check_btn" onclick="confirmId()">중복확인</button>
 							<p class="check_font" id="idCheckMessage"></p>
 						</div>
@@ -387,14 +318,15 @@
 						<!--  비밀번호 -->
 						<div class="form-group">
 							<label for="user_pw">비밀번호</label>
-							<input type="password" id="user_pw" name="user_pw">
+							<input type="password" id="user_pw" name="user_pw" oninput="validatePw()">
 							<p class="check_font" id="pwCheckMessage"></p>
 						</div>
 
 						<!-- 비밀번호 확인 -->
 						<div class="form-group">
 							<label for="user_pw_confirm">비밀번호 확인</label>
-							<input type="password" id="user_pw_confirm" name="user_pw_confirm">
+							<input type="password" id="user_pw_confirm" name="user_pw_confirm"
+								oninput="validatePwConfirm()">
 							<p class="check_font" id="pwConfirmMessage"></p>
 						</div>
 
@@ -409,7 +341,7 @@
 						<div class="form-group">
 							<label for="user_tel">휴대폰 번호</label>
 							<input type="text" id="user_tel" name="user_tel" oninput="hypenTel(this)">
-							<p class="check_font" id="phoneCheckMessage"></p>
+							<p class="check_font" id="telCheckMessage"></p>
 						</div>
 
 						<!-- 우편 번호 -->
@@ -417,25 +349,27 @@
 							<label for="user_zipcode">우편번호</label>
 							<input type="text" id="user_zipcode" name="user_zipcode">
 							<button type="button" onclick="findAddr()">주소 검색</button>
+							<p class="check_font" id="zipcodeCheckMessage"></p>
 						</div>
 
 						<!-- 주소 -->
 						<div class="form-group">
 							<label for="user_addr1">주소</label>
 							<input type="text" id="user_addr1" name="user_addr1">
+							<p class="check_font" id="addr1CheckMessage"></p>
 						</div>
 
 						<!-- 상세 주소 -->
 						<div class="form-group">
 							<label for="user_addr2">상세주소</label>
 							<input type="text" id="user_addr2" name="user_addr2">
+							<p class="check_font" id="addr2CheckMessage"></p>
 						</div>
 
 						<!-- 이메일  -->
 						<div class="form-group">
 							<label for="user_email">이메일</label>
-							<input type="text" id="user_email1" name="user_email1"
-								style="width: 30px;">
+							<input type="text" id="user_email1" name="user_email1" style="width: 30px;">
 							&nbsp;@&nbsp;
 							<input type="text" id="user_email3" name="selboxDirect" />
 							<select id="user_email2" name="email_domain">
@@ -446,7 +380,7 @@
 								<option value="direct">직접입력</option>
 							</select>
 							<button type="button" onclick="emailCheck()">인증번호 전송</button>
-							<p class="check_font" id="email_check"></p>
+							<p class="check_font" id="emailCheckMessage"></p>
 							<!-- hidden input to hold the full email value -->
 							<input type="hidden" id="hidden_user_email" name="user_email" />
 						</div>
@@ -462,10 +396,12 @@
 						<!-- 제출 버튼 -->
 						<div class="form-gruop">
 							<div class="moveBtn">
-								<a href="/view_jm/buyerJoinAgree"><button id="backBtn" type="reset" >이전</button></a>
+								<a href="/view_jm/buyerJoinAgree"><button id="backBtn"
+										onclick="history.back();">이전</button></a>
 								<a href="/view_jm/buyerJoinInfo"><button type="submit" id="submitBtn">회원가입</button></a>
 							</div>
 						</div>
+
 					</form>
 				</div>
 			</div>

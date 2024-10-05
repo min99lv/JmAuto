@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전문가 개인정보 입력</title>
 <style>
 
-
-
+	
 .form-group input {
 	flex: 1; /* 입력 필드가 남은 공간을 모두 차지하도록 설정합니다. */
 	padding: 8px; /* 입력 필드의 내부 여백을 설정합니다. */

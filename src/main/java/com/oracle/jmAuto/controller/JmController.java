@@ -473,6 +473,9 @@ public class JmController {
 		}
 	}
 
+
+		//  ******************************************** 아이디 찾기 ************************************************* //
+
 	// 아이디 찾기 화면 출력
 	@GetMapping(value = "/findId")
 	public String findIdForm() {
@@ -510,6 +513,10 @@ public class JmController {
 		return "view_jm/findIdResult";
 	}
 
+	
+	
+	//  ******************************************** 비밀번호 찾기 *************************************************//
+	
 	// 비밀번호 찾기 화면 출력
 	@GetMapping(value = "/findPw")
 	public String findPwForm() {
@@ -543,6 +550,8 @@ public class JmController {
 
 	}
 
+	
+	// 비밀번호 찾기 - 임시비밀번호 발급 
 	@PostMapping(value = "/tempPassword")
 	public String tempPassword(@RequestParam String user_id, Model model) {
 		// 임시 비밀번호 생성 후 업데이트

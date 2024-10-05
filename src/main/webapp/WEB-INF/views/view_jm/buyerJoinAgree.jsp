@@ -6,10 +6,10 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>약관 동의</title>
+		<title>개인회원 약관 동의</title>
 		<style>
-					/* 폼 그룹 스타일 */
-					.form-group {
+			/* 폼 그룹 스타일 */
+			.form-group {
 				/* 블록 요소로 설정하여 세로 정렬 */
 				display: block;
 			}
@@ -80,7 +80,7 @@
 				top: 3px;
 			}
 
-			footer{
+			footer {
 				top: 1000px;
 			}
 		</style>
@@ -288,4 +288,5 @@
 			<%@ include file="../footer.jsp" %>
 		</footer>
 	</body>
+
 	</html>
