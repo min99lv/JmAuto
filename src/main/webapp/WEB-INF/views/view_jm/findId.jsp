@@ -21,6 +21,7 @@
 	</style>
 	<script type="text/javascript" src="/js/jquery.js"></script>
 	<script type="text/javascript">
+		
 		$(function () {
 			//직접입력 인풋박스 기존에는 숨어있다가
 			$("#user_email3").hide();
@@ -70,23 +71,35 @@
 
 
 
-		// 이메일 인증 
 		function emailCheck() {
+    var emailCheckMessage = $("#email_check");
 
-			var emailCheckMessage = $("#email_check");
+	// 이메일 유효성 검사 및 hidden_user_email 설정
+    if (!validateEmail()) {
+        emailCheckMessage.text("유효한 이메일 주소를 입력해주세요.").css("color", "red");
+        return; // 이메일이 유효하지 않으면 종료
+    }
 
-			$.ajax({
-				url: '/view_jm/sendAuthCode',
-				type: 'POST',
-				data: { 'user_email': $("#hidden_user_email").val() },
-				success: function (response) {
-					emailCheckMessage.text("인증번호가 전송 되었습니다").css("color", "green");
-				},
-				error: function () {
-					emailCheckMessage.text("인증번호가  전송 실패하였습니다.").css("color", "red");
-				}
-			});
-		}
+    // hidden_user_email 값 확인
+    var email = $("#hidden_user_email").val();
+    if (email === "") {
+        emailCheckMessage.text("이메일이 입력되지 않았습니다.").css("color", "red");
+        return; // 이메일 값이 없으면 종료
+    }
+
+    $.ajax({
+        url: '/view_jm/sendAuthCode',
+        type: 'POST',
+        data: { 'user_email': email },  // 이메일 값 전송
+        success: function (response) {
+            emailCheckMessage.text("인증번호가 전송되었습니다.").css("color", "green");
+        },
+        error: function () {
+            emailCheckMessage.text("인증번호 전송 실패").css("color", "red");
+        }
+    });
+}
+
 
 		// 인증번호 확인
 		function verifyAuthCode() {
@@ -132,12 +145,13 @@
 				<h1>아이디 찾기</h1>
 			</div>
 			<div class="content">
-				<div class="container">
+			<div class="container">	
 					<form method="post" name="frm" action="/view_jm/findId">
 						<div class="form-group">
 							<label for="user_name">이름</label>
 							<input type="text" id="user_name" name="user_name" required="required">
 						</div>
+						
 						<!-- 이메일  -->
 						<div class="form-group">
 							<label for="user_email">이메일</label>

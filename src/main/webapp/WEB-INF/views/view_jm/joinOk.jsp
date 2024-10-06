@@ -25,9 +25,9 @@ input[type="checkbox"] {
 .form-group{
     display: flex;
     justify-content: center;
-    margin-bottom: 40px;
 
 }
+
 
 .form-group h1{
  text-align: center;
@@ -41,13 +41,17 @@ input[type="checkbox"] {
 }
 #submitBtn{
 	position: relative;
-	top: 50px;
+	top: 25px;
 }
 
 a {
  color: white;
  text-decoration-line: none;
 
+}
+
+footer{
+	top : 100px;
 }
 	
 </style>
@@ -78,9 +82,11 @@ a {
                             <h1 id="title">회원가입이 완료되었습니다</h1>
 					</div>
 					<div class="form-group">
-						<button  id="submitBtn" style="width: 200px;">
-							<a href="/view_jm/login">로그인</a>
-						</button>
+						<div class="moveBtn">
+							<button  id="submitBtn">
+								<a href="/view_jm/login">로그인</a>
+							</button>
+						</div>
 					</div>
 					</div>
 				</div>

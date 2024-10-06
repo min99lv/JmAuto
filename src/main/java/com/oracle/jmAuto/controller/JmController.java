@@ -543,7 +543,7 @@ public class JmController {
 			model.addAttribute("user_id", user_id);
 			model.addAttribute("userCheckMessage", "회원확인이 완료되셨습니다");
 		} else {
-			model.addAttribute("userCheckMessage", "아이디와 이메일이 일치하지 않습니다 다시 시도해주세요");
+			model.addAttribute("userCheckMessage", "존재하지 않는 회원입니다.");
 		}
 
 		return "view_jm/findPwResult";
