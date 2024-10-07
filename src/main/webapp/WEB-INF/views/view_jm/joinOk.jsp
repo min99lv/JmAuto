@@ -12,7 +12,7 @@
 /* 제목 스타일 */
 #title {
 	position: absolute;
-	top: 100px;
+	top: 150px;
 	text-align: center;
 	color: #313131;
 }

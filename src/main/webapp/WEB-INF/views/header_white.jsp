@@ -133,7 +133,7 @@ a {
 							<a href="/view_ad/adminPage" class="menu_login_white">관리자 페이지</a>
 						</c:when>
 							<c:when test="${sessionScope.user.user_type eq 'S' || sessionScope.user.user_type eq 'P' || sessionScope.user.user_type eq 'B'}">
-							<a class="menu_login_white" href="/view_jm/mypage">마이페이지</a>
+							<a class="menu_login_white" href="/view_ms/myPage">마이페이지</a>
 						</c:when>
 					</c:choose>
 					<button class="but_login_white">

@@ -10,7 +10,7 @@
 /* 제목 스타일 */
 #title {
 	position: absolute;
-	top: 100px;
+	top: 150px;
 	text-align: center;
 	color: #313131;
 }
@@ -49,7 +49,7 @@ a {
 
 h4{
 	position: relative;
-	top: 40px;
+	top: 70px;
 	color: gray;
 
 }

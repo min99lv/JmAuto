@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -213,7 +214,7 @@ public class JmController {
 			// business.setBuz_filename(fileName);
 
 			// 파일 url 생성 (웹에서 접근 가능한 경로로 설정)
-			String fileUrl = "/businessImage/" + fileName;
+			String fileUrl = "/userImages/buzImages/" + fileName;
 			business.setBuz_url(fileUrl); // business객체에 파일 url 설정
 
 			// 방법 2
@@ -235,7 +236,7 @@ public class JmController {
 
 	// 판매자 회원가입
 	@PostMapping(value = "/sellerJoinRequest")
-	public String sellerJoin(User_Table user_table, HttpSession session, Account account)
+	public String sellerJoin(HttpServletRequest request ,User_Table user_table, HttpSession session, Account account)
 			throws FileNotFoundException, IOException {
 		System.out.println("JmController.sellerJoin start...");
 
@@ -261,9 +262,10 @@ public class JmController {
 		// 실제 파일 저장 처리
 		if (fileData != null && fileName != null) {
 			// 실제 파일 저장 경로
-			String filePath = "C:/businessImage";
+			String filePath = request.getSession().getServletContext().getRealPath("/userImages/buzImages");
 			// String uniqueFileName = business.getBuz_num() + "_" + fileName; // 고유 파일명 설정
 			File dest = new File(filePath + File.separator + fileName);
+			System.out.println("JmController.sellerJoin filePath >>" + filePath);
 
 			try (FileOutputStream fos = new FileOutputStream(dest)) {
 				// 파일을 실제로 저장
@@ -348,7 +350,7 @@ public class JmController {
 		try {
 
 			// 파일 url 생성 (웹에서 접근 가능한 경로로 설정)
-			String fileUrl = "/certImage/" + fileName;
+			String fileUrl = "/userImages/certImages/" + fileName;
 			cert.setCert_url(fileUrl); // 자격증 파일 url 설정
 
 			// 방법 2
@@ -371,7 +373,7 @@ public class JmController {
 
 	// 전문가 회원가입
 	@PostMapping(value = "/profJoinRequest")
-	public String profJoin(@ModelAttribute User_Table user_table, HttpSession session, Account account)
+	public String profJoin(HttpServletRequest request,@ModelAttribute User_Table user_table, HttpSession session, Account account)
 			throws FileNotFoundException, IOException {
 		System.out.println("JmController.profJoin start...");
 		System.out.println("Certified Info in Session: " + session.getAttribute("certifiedInfo"));
@@ -397,7 +399,7 @@ public class JmController {
 		// 실제 파일 저장 처리
 		if (fileData != null && fileName != null) {
 			// 실제 파일 저장 경로
-			String filePath = "C:/certImage";
+			String filePath = request.getSession().getServletContext().getRealPath("/userImages/buzImages");
 			// String uniqueFileName = business.getBuz_num() + "_" + fileName; // 고유 파일명 설정
 			File dest = new File(filePath + File.separator + fileName);
 

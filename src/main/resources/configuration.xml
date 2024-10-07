@@ -23,6 +23,6 @@
 		<typeAlias alias="Zzim" type="com.oracle.jmAuto.dto.Zzim"/>
 		<typeAlias alias="Note" type="com.oracle.jmAuto.dto.Note"/>
 		<typeAlias alias="Payment" type="com.oracle.jmAuto.dto.Payment"/>
-			
+		<typeAlias alias="AllUser_Info" type="com.oracle.jmAuto.dto.AllUser_Info"/>
 	</typeAliases>
 </configuration> 

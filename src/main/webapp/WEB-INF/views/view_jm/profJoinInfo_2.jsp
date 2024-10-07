@@ -764,7 +764,7 @@ $(document).ready(function () {
 		</div>
 		<div class="content">
 			<div class="container">
-				<form method="post" name="frm" action="/view_jm/sellerJoinRequest">
+				<form method="post" name="frm" action="/view_jm/profJoinRequest" onsubmit="return chkValue();">
 
 					<!-- 아이디 입력 -->
 					<div class="form-group">

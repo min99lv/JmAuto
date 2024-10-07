@@ -453,7 +453,7 @@
 		</div>
 		<div class="content">
 			<div class="container">
-				<form method="post" name="frm" action="/view_jm/profJoinRequest">
+				<form method="post" name="frm" action="/view_jm/sellerJoinRequest" onsubmit="return chkValue();">
 
 					<!-- 아이디 입력 -->
 					<div class="form-group">

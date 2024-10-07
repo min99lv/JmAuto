@@ -2,10 +2,12 @@ package com.oracle.jmAuto.dto;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
-public class User_Table {
+public class AllUser_Info {
 	private String user_id;  			// 아이디
 	private String user_pw;			// 비밀번호
 	private String user_name;		// 이름
@@ -22,10 +24,22 @@ public class User_Table {
 	private int del_state;					// 탈퇴여부
 	private String approval;			// 승인여부
 	private String introduction;		// 소개
-	
-	private String region;          		// oracle에서 만든 컬럼 (지역)
-    private String buz_name;        // oracle Join용 사업장 주소
-    private String buz_addr;        	// oracle Join용 사업장 이름 주소
     
+	private String buz_name;
+	private String buz_addr;
+	private String Buz_filename;
+	private String buz_url;
+	
+	private String cert_name;
+	private String cert_loc;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date cert_date;
+	private String cert_filename;
+	private String cert_url;
+	
+	private String account_num;
+	private String account_name;
+	private String account_bank;
+	
 
 }
