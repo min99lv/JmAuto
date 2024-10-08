@@ -72,6 +72,7 @@ public class AdminServiceImpl implements AdminService {
 
 
 
+	// NOTE : 승인 요청 사용자 상세 정보 
 	@Override
 	public AllUser_Info userDetail(String user_id) {
 		System.out.println("AdminServiceImpl.userDetail start...");
@@ -79,6 +80,30 @@ public class AdminServiceImpl implements AdminService {
 		AllUser_Info userInfo = ad.userDetail(user_id);
 
 		return userInfo;
+	}
+
+
+
+	// NOTE : 관리자 추가
+	@Override
+	public int createManager(User_Table user) {
+
+		System.out.println("AdminServiceImpl.createUser() start...");
+
+		int result = ad.createManager(user);
+
+		return result;
+	}
+
+
+
+	@Override
+	public List<User_Table> searchUserList(String keyword) {
+		System.out.println("AdminServiceImpl.selectUserList() start....");
+
+		List<User_Table> userList = ad.searchUserList(keyword);
+
+		return userList;
 	}
 
 }

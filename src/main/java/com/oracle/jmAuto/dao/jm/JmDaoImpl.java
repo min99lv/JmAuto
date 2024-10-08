@@ -166,16 +166,16 @@ public class JmDaoImpl implements JmDao {
 					}
 				}
 				certInsertResult = 1;
-				System.out.println("buzJoin OK !!!!!!!!!!!!!!!!!");
+				System.out.println("cert Join OK !!!!!!!!!!!!!!!!!");
 
 			} else {
 				certInsertResult = 0;
-				System.out.println("buzInsert Fail --->  result " + certInsertResult);
+				System.out.println("certInsert Fail --->  result " + certInsertResult);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("JmDaoImpl.sellerJoin Error!!" + e.getMessage());
+			System.out.println("JmDaoImpl.certJoin Error!!" + e.getMessage());
 			throw e; // 트랜잭션 롤백을 유도
 		}
 
@@ -224,6 +224,7 @@ public class JmDaoImpl implements JmDao {
 
 	}
 
+	// NOTE : 사용자 이메일 정보 GET
 	@Override
 	public String getUserEmail(String user_id) {
 		System.out.println("JmDaoImpl.getUserEmail start !!!!!!!");		

@@ -70,6 +70,7 @@ public class AdminDaoImpl implements AdminDao {
 
 
 
+	// NOTE : 승인 요청 회원 상세 정보
 	@Override
 	public AllUser_Info userDetail(String user_id) {
 		System.out.println("AdminDaoImpl.userDetail start...");
@@ -80,6 +81,35 @@ public class AdminDaoImpl implements AdminDao {
 
 
 		return userInfo;
+	}
+
+
+
+	// NOTE : 관리자 추가
+	@Override
+	public int createManager(User_Table user) {
+		System.out.println("AdminDaoImpl.createManager() start...");
+		
+
+		int result = session.insert("com.oracle.jmAuto.dto.Mapper.admin.createManager", user);
+
+		System.out.println("AdminDaoImpl.createManager() result >>" + result);
+		
+
+		return result;
+	}
+
+
+
+	// NOTE - 회원 목록 검색
+	@Override
+	public List<User_Table> searchUserList(String keyword) {
+		System.out.println("AdminDaoImpl.selectUserList() start...");
+		List<User_Table> userList = session.selectList("com.oracle.jmAuto.dto.Mapper.admin.searchUserList",keyword);
+
+		System.out.println("AdminDaoImpl.selectUserList() userList" + userList);
+
+		return userList;
 	}
 
 }

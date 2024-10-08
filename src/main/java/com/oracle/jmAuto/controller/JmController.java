@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.http.HttpRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -399,7 +398,7 @@ public class JmController {
 		// 실제 파일 저장 처리
 		if (fileData != null && fileName != null) {
 			// 실제 파일 저장 경로
-			String filePath = request.getSession().getServletContext().getRealPath("/userImages/buzImages");
+			String filePath = request.getSession().getServletContext().getRealPath("/userImages/certImages");
 			// String uniqueFileName = business.getBuz_num() + "_" + fileName; // 고유 파일명 설정
 			File dest = new File(filePath + File.separator + fileName);
 

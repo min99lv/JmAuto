@@ -19,4 +19,8 @@ public interface AdminDao {
 
 	AllUser_Info userDetail(String user_id);
 
+    int createManager(User_Table user);
+
+    List<User_Table> searchUserList(String keyword);
+
 }

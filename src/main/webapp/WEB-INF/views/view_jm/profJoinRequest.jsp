@@ -56,7 +56,7 @@ h4{
 }
 
 footer{
-	top : 100px;
+	top : 200px;
 }
 </style>
 </head>

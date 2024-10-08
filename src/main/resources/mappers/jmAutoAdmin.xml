@@ -60,5 +60,17 @@
 	</select>
 
 
+	<insert id="createManager" parameterType="User_Table">
+		INSERT INTO USER_TABLE
+		(user_id,user_pw,user_name,user_email,user_tel,user_type,del_state,approval)
+		VALUES (#{user_id},#{user_pw},#{user_name},#{user_email},#{user_tel},#{user_type},#{del_state},#{approval})
+	</insert>
+
+<select id="searchUserList" parameterType="String" resultType="User_Table">
+    SELECT *
+    FROM user_table
+    WHERE user_name LIKE '%' || #{keyword} || '%'
+       OR user_id LIKE '%' || #{keyword} || '%'
+</select>
 
 </mapper> 

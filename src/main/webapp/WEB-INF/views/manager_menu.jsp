@@ -218,10 +218,10 @@
   <ul class="nav">
     <li class="nav__items3">
 	  <img alt="icon" src="<%=request.getContextPath()%>/images/main/회원관리_icon.png" class="nav_items_img3">
-      <a href="/view_ms/buyList" class="nav_items_text3">회원</a>
+      <a href="/view_ad/adminPage" class="nav_items_text3">회원</a>
       <div class="mon_nav_items">
-      	<a>회원관리</a>
-      	<a>가입요청관리</a>
+      	<a href="/view_ad/adminPage">회원관리</a>
+      	<a href="/view_ad/userApprovalManagement">가입요청관리</a>
       </div>
     </li>
       
