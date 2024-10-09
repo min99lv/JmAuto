@@ -1,10 +1,15 @@
 package com.oracle.jmAuto.dao.jm;
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.oracle.jmAuto.dto.Account;
+import com.oracle.jmAuto.dto.FullUserInfo;
 import com.oracle.jmAuto.dto.Business;
 import com.oracle.jmAuto.dto.Certified;
 import com.oracle.jmAuto.dto.User_Table;
@@ -16,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class JmDaoImpl implements JmDao {
 	private final SqlSession session;
 
-	// 로그인
+	// TODO : 로그인 처리 
 	@Override
 	public User_Table login(String user_id) {
 		System.out.println("JmDaoImpl.login start...");
@@ -233,6 +238,122 @@ public class JmDaoImpl implements JmDao {
 		System.out.println("JmDaoImpl.getUserEmail [user_email] : " + user_email );
 		
 		return user_email;
+	}
+	
+	
+	// NOTE : 회원목록조회
+	@Override
+	public List<User_Table> selectUserList(int startIndex, int rowPage) {
+		System.out.println("AdminDaoImpl.selectUserList() start...");
+		
+		// Map 객체 생성하여 파라미터 설정
+	    Map<String, Integer> params = new HashMap<>();
+	    params.put("startIndex", startIndex);
+	    params.put("rowPage", rowPage);
+
+	    // Mapper 호출 시 Map 전달
+	    List<User_Table> userList = session.selectList("com.oracle.jmAuto.dto.Mapper.jm.selectUserList", params);
+
+		//List<User_Table> userList = session.selectList("com.oracle.jmAuto.dto.Mapper.jm.selectUserList");
+
+		return userList;
+	}
+
+
+
+	// NOTE : 회원 비활성화
+	@Override
+	public int userDeactive(String user_id) {
+
+		int result = session.update("com.oracle.jmAuto.dto.Mapper.jm.userDeactive",user_id);
+		
+		return result;
+	}
+
+
+	// NOTE : 회원 활성화
+	@Override
+	public int userActive(String user_id) {
+			int result = session.update("com.oracle.jmAuto.dto.Mapper.jm.userActive",user_id);
+		
+		return result;
+	}
+
+
+
+	// NOTE - 승인 요청 회원 목록 조회
+	@Override
+	public List<User_Table> selectApprovalUserList() {
+		System.out.println("AdminDaoImpl.selectUserList() start...");
+		List<User_Table> userList = session.selectList("com.oracle.jmAuto.dto.Mapper.jm.selectApprovalUserList");
+
+		return userList;
+	}
+
+
+	// NOTE - 승인 요청 처리
+	@Override
+	public int userApprove(String user_id) {
+		int result = session.update("com.oracle.jmAuto.dto.Mapper.jm.userApprove",user_id);
+		
+		
+		return result;
+	}
+
+
+
+	// NOTE - 승인 요청 회원 상세 정보
+	@Override
+	public FullUserInfo userDetail(String user_id) {
+		System.out.println("AdminDaoImpl.userDetail start...");
+		
+		FullUserInfo userInfo = session.selectOne("com.oracle.jmAuto.dto.Mapper.jm.userDetail",user_id);
+		
+		System.out.println("AdminDaoImpl.userDetail usesrInfo >>" + userInfo);
+
+
+		return userInfo;
+	}
+
+
+
+	// NOTE - 관리자 추가
+	@Override
+	public int createManager(User_Table user) {
+		System.out.println("AdminDaoImpl.createManager() start...");
+		
+
+		int result = session.insert("com.oracle.jmAuto.dto.Mapper.jm.createManager", user);
+
+		System.out.println("AdminDaoImpl.createManager() result >>" + result);
+		
+
+		return result;
+	}
+
+
+
+	// NOTE - 회원 목록 검색
+	@Override
+	public List<User_Table> searchUserList(String keyword) {
+		System.out.println("AdminDaoImpl.selectUserList() start...");
+		List<User_Table> userList = session.selectList("com.oracle.jmAuto.dto.Mapper.jm.searchUserList",keyword);
+
+		System.out.println("AdminDaoImpl.selectUserList() userList" + userList);
+
+		return userList;
+	}
+
+	@Override
+	public int userTotal() {
+		System.out.println("AdminDaoImpl.userTotal() start...");
+		
+		int userTotal = session.selectOne("com.oracle.jmAuto.dto.Mapper.jm.userTotal");
+		
+		System.out.println("AdminDaoImpl.userTotal()  userTotal  ===>	" + userTotal);
+		
+		
+		return userTotal;
 	}
 
 }

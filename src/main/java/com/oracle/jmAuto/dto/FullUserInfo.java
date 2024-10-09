@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
 @Data
-public class AllUser_Info {
+public class FullUserInfo {
 	private String user_id;  			// 아이디
 	private String user_pw;			// 비밀번호
 	private String user_name;		// 이름

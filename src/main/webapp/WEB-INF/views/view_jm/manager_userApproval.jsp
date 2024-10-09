@@ -124,7 +124,7 @@ th {
 </head>
 <script>
 	function goToDetail(userId) {
-		window.location.href = 'userDetail?user_id=' + userId;
+		window.location.href = 'manager_userDetail?user_id=' + userId;
 	}
 
 	function filterUserType(type) {

@@ -108,7 +108,7 @@
 	function userApprove(userId) {
 		alert("userid>> " + userId);
 		$.ajax({
-			url: '/view_ad/userApprove',
+			url: '/view_jm/userApprove',
 			type: 'GET',
 			dataType: 'json',
 			data: { 'user_id': userId },
